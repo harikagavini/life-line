@@ -1,4 +1,5 @@
 package org.lifeline.service;
+import org.lifeline.model.AuthRequest;
 import org.lifeline.model.Donor;
 import org.lifeline.repository.DonorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +17,9 @@ public class DonorServiceImpl implements DonorService {
     }
 
     //Validate user login
-    public boolean validateLogin(String email, String password){
-        Donor donor = donorRepo.findByEmail(email);
-            if (donor.getPassword().equals(password)) {
+    public boolean validateLogin(AuthRequest authReq){
+        Donor donor = donorRepo.findByEmail(authReq.getEmail());
+            if (donor.getPassword().equals(authReq.getPassword())) {
                 return true;
             } else {
                 return false;
