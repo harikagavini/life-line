@@ -27,7 +27,7 @@ public class OrderServiceImpl {
 
         return orderRepo.save(order);  // Save and return the created order
     }
-    
+
     public List<Order> getAllOrder() {
         return orderRepo.findAll();
     }

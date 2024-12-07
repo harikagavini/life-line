@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/lifeline/orders")
@@ -37,7 +36,6 @@ public class OrderController {
         return ResponseEntity.ok(orders);
     }
 
-    // Update order
     @PutMapping("/{orderId}")
     public ResponseEntity<Order> updateOrder(@PathVariable Long order_id,
                                              @RequestParam String hosp_id,
@@ -49,7 +47,6 @@ public class OrderController {
         return ResponseEntity.ok(updatedOrder);
     }
 
-    // Delete order
     @DeleteMapping("/{orderId}")
     public ResponseEntity<Void> deleteOrder(@PathVariable Long orderId) {
         orderService.deleteOrder(orderId);
