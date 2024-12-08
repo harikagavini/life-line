@@ -24,7 +24,7 @@ public class OrderController {
         return ResponseEntity.ok(order);
     }
 
-    @GetMapping
+    @GetMapping("/")
     public ResponseEntity<List<Order>> getAllOrders() {
         List<Order> orders = orderService.getAllOrder();
         return ResponseEntity.ok(orders);
@@ -36,7 +36,7 @@ public class OrderController {
         return ResponseEntity.ok(orders);
     }
 
-    @PutMapping("/{orderId}")
+    @PutMapping("/{order_id}")
     public ResponseEntity<Order> updateOrder(@PathVariable Long order_id,
                                              @RequestParam String hosp_id,
                                              @RequestParam String branch_id,

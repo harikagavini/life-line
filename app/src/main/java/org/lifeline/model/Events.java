@@ -2,39 +2,24 @@ package org.lifeline.model;
 
 import jakarta.persistence.*;
 
+import java.util.Date;
+
 @Entity
-@Table(name = "BloodBank")
-public class BloodBank {
+@Table(name = "Events")
+public class Events {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long branch_id;
+    private Long event_id;
+
+    private String name;
+    private Date event_date;
 
     private String bb_id;
-    private String name;
-    private String email;
-    private String phone_num;
     private String street;
     private String city;
     private String state;
     private String zip;
-
-
-    public Long getBranch_id() {
-        return branch_id;
-    }
-
-    public void setBranch_id(Long branch_id) {
-        this.branch_id = branch_id;
-    }
-
-    public String getBb_id() {
-        return bb_id;
-    }
-
-    public void setBb_id(String bb_id) {
-        this.bb_id = bb_id;
-    }
 
     public String getName() {
         return name;
@@ -44,20 +29,20 @@ public class BloodBank {
         this.name = name;
     }
 
-    public String getEmail() {
-        return email;
+    public Date getEvent_date() {
+        return event_date;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEvent_date(Date event_date) {
+        this.event_date = event_date;
     }
 
-    public String getPhone_num() {
-        return phone_num;
+    public String getBb_id() {
+        return bb_id;
     }
 
-    public void setPhone_num(String phone_num) {
-        this.phone_num = phone_num;
+    public void setBb_id(String bb_id) {
+        this.bb_id = bb_id;
     }
 
     public String getStreet() {
