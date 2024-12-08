@@ -8,8 +8,8 @@ import java.util.Date;
 @Table(name = "Donor")
 public class Donor {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long ID;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Long donor_id;
     @Column(name = "FirstName", nullable = false)
     private String first_name;
     @Column(name = "LastName", nullable = false)
@@ -33,7 +33,13 @@ public class Donor {
 
     private String password;
 
+    public Long getDonor_id() {
+        return donor_id;
+    }
 
+    public void setDonor_id(Long donor_id) {
+        this.donor_id = donor_id;
+    }
 
     public String getFirst_name() {
         return first_name;

@@ -8,7 +8,7 @@ import jakarta.persistence.*;
 public class HospitalLocation {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long hospId;
 
     private String name;

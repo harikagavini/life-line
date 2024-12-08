@@ -9,7 +9,7 @@ import java.util.Date;
 public class Events {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long event_id;
 
     private String name;

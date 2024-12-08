@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 public class BloodBank {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long branch_id;
 
     private String bb_id;

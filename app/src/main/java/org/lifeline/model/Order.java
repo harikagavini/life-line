@@ -8,7 +8,7 @@ import java.util.Date;
 @Table(name = "Orders")
 public class Order {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Assuming order_id is auto-generated
+    @GeneratedValue(strategy = GenerationType.SEQUENCE) // Assuming order_id is auto-generated
     @Column(name = "OrderId")
     private Long order_id;
 
