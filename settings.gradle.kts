@@ -12,4 +12,4 @@ plugins {
 }
 
 rootProject.name = "life-line"
-include("app")
+include("app", "ui")
