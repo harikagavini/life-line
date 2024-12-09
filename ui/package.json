@@ -3,20 +3,21 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "kill": "lsof -i :3000 -t | grep -q . && lsof -i :3000 -t | xargs kill || exit 0",
+    "dev": "npm run kill && next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "npm run kill && next start",
     "lint": "next lint"
   },
   "dependencies": {
+    "next": "15.0.4",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "next": "15.0.4"
+    "react-dom": "^19.0.0"
   },
   "devDependencies": {
-    "postcss": "^8",
-    "tailwindcss": "^3.4.1",
     "eslint": "^8",
-    "eslint-config-next": "15.0.4"
+    "eslint-config-next": "15.0.4",
+    "postcss": "^8",
+    "tailwindcss": "^3.4.1"
   }
 }

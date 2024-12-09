@@ -12,4 +12,10 @@ plugins {
 }
 
 rootProject.name = "life-line"
-include("app", "ui")
+
+includeBuild("plugins")
+include(
+    "app",
+    "ui",
+    "database"
+)
