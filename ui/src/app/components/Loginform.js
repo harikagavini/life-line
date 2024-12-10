@@ -2,12 +2,12 @@
 
 import React, { useState } from 'react';
 import configuration from '@/app/config';
+import Cookies from 'js-cookie';
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -22,8 +22,8 @@ const LoginForm = () => {
       const data = await response.json();
       if (data.success) {
         // Registration successful, redirect to login page
-        configuration.token = data.token;
-        window.location.href = '/home';
+        Cookies.set('token', data.token);
+        window.location.href = '/feed';
       } else {
         setError(data.message);
       }
@@ -34,7 +34,7 @@ const LoginForm = () => {
 
   return (
     <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-md">
-      <h2 className="text-2xl font-bold mb-4">Register</h2>
+      <h2 className="text-2xl font-bold mb-4">Login</h2>
       <form onSubmit={handleSubmit}>
         <div className="flex flex-wrap -mx-3 mb-6">
           <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">

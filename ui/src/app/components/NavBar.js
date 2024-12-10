@@ -3,7 +3,7 @@ import Link from "next/link";
 const Navbar = ({ options }) => {
   return (
     <nav className="navbar">
-      <div className="logo">LifeLine</div>
+      <div className="logo"><Link href="/">LifeLine</Link></div>
       <ul className="nav-links">
         {options.map((option, index) => (
           <li key={index}><Link key={index} href={option.href}>{option.label}</Link></li>
