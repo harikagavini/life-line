@@ -2,15 +2,20 @@ package uk.co.mruoc.mysql
 
 import com.wix.mysql.EmbeddedMysql
 import org.gradle.api.DefaultTask
+import org.gradle.api.Project
 import org.gradle.api.tasks.Internal
 import org.gradle.api.tasks.TaskAction
+import javax.inject.Inject
 
 class StartEmbeddedMysqlTask extends DefaultTask {
 
     private static final def MYSQL_PROCESS_PROPERTY_NAME = "mysqlProcess"
     private static final def MYSQL_EXTENSION_NAME = "embeddedMysql"
+    private final Project project
 
-    StartEmbeddedMysqlTask() {
+    @Inject
+    StartEmbeddedMysqlTask(Project project) {
+        this.project = project
         description 'starts an embedded mysql process'
     }
 

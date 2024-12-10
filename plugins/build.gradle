@@ -51,7 +51,7 @@ artifacts {
 gradlePlugin {
     plugins {
         embeddedMysqlPlugin {
-            id = 'com.github.michaelruocco.embedded-mysql-plugin'
+            id = 'mysql.plugin'
             implementationClass = 'uk.co.mruoc.mysql.EmbeddedMysqlPlugin'
         }
     }

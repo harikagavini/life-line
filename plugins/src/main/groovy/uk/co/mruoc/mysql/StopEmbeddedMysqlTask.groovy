@@ -2,14 +2,19 @@ package uk.co.mruoc.mysql
 
 import com.wix.mysql.EmbeddedMysql
 import org.gradle.api.DefaultTask
+import org.gradle.api.Project
 import org.gradle.api.tasks.Internal
 import org.gradle.api.tasks.TaskAction
 
-class StopEmbeddedMysqlTask extends DefaultTask {
+import javax.inject.Inject
 
+class StopEmbeddedMysqlTask extends DefaultTask {
+    private final Project project
     private static final def MYSQL_PROCESS_PROPERTY_NAME = "mysqlProcess"
 
-    StopEmbeddedMysqlTask() {
+    @Inject
+    StopEmbeddedMysqlTask(Project project) {
+        this.project = project
         description 'stops an embedded mysql process'
     }
 
