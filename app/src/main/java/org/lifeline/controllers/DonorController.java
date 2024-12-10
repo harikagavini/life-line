@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/lifeline")
-public class Donorcontroller {
+public class DonorController {
 
     @Autowired
     private DonorService donorService;
@@ -18,27 +18,19 @@ public class Donorcontroller {
     @Autowired
     private DonorRepository donorRepo;
 
-    @GetMapping("/register")
-    public String showRegistrationPage(){
-        return "register";
-    }
-
     @PostMapping("/register")
+    @ResponseBody
     public String registerDonor(@RequestBody Donor donor){
         donorService.saveDonor(donor);
         return "Registration Successful";
-    }
-
-    @GetMapping("/login")
-    public String showLogInPage(){
-        return "Login";
     }
 
     @PostMapping("/login")
     public String loginUser(@RequestBody AuthRequest authReq) {
         if (donorService.validateLogin(authReq)) {
             return "Login success";
-        }Donor donor = donorRepo.findByEmail(authReq.getEmail());
+        }
+        Donor donor = donorRepo.findByEmail(authReq.getEmail());
         if (donor == null) {
             return "Email doesn't exist";
         } else {
@@ -50,6 +42,4 @@ public class Donorcontroller {
     public String showHomePage(){
         return "home";
     }
-
-
 }
