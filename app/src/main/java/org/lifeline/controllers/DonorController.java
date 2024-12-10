@@ -31,21 +31,23 @@ public class DonorController {
 
     @PostMapping("/login")
     public LoginResponse loginUser(@RequestBody AuthRequest authReq) {
-        if (donorService.validateLogin(authReq)) {
-            return getLoginResponse("Login Success", true);
+        String token = donorService.validateLogin(authReq);
+        if (token != null) {
+            return getLoginResponse("Login Success", true, token);
         }
         Donor donor = donorRepo.findByEmail(authReq.getEmail());
         if (donor == null) {
-            return getLoginResponse("Email doesn't exist", true);
+            return getLoginResponse("Email doesn't exist", true, null);
         } else {
-            return getLoginResponse("Login Failed", true);
+            return getLoginResponse("Login Failed", true, null);
         }
     }
 
-    private LoginResponse getLoginResponse(String msg, Boolean success) {
+    private LoginResponse getLoginResponse(String msg, Boolean success, String token) {
         LoginResponse loginResponse = new LoginResponse();
         loginResponse.setMessage(msg);
         loginResponse.setSuccess(success);
+        if(token != null) loginResponse.setToken(token);
         return loginResponse;
     }
 

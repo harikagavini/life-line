@@ -1,4 +1,5 @@
 package org.lifeline.service;
+import org.lifeline.jwt.JwtTokenGenerator;
 import org.lifeline.model.AuthRequest;
 import org.lifeline.model.Donor;
 import org.lifeline.repository.AuthRepository;
@@ -15,6 +16,9 @@ public class DonorServiceImpl implements DonorService {
     @Autowired
     private AuthRepository authRepository;
 
+    @Autowired
+    private JwtTokenGenerator jwtTokenGenerator;
+
     @Override
     public Donor saveDonor(Donor donor) {
         if(donor.getEmail() == null || donor.getPassword() == null) {
@@ -28,13 +32,11 @@ public class DonorServiceImpl implements DonorService {
         return donorRepository.save(donor);
     }
 
-    //Validate user login
-    public boolean validateLogin(AuthRequest authReq){
-        Donor donor = donorRepository.findByEmail(authReq.getEmail());
-            if (donor.getPassword().equals(authReq.getPassword())) {
-                return true;
-            } else {
-                return false;
-            }
+    public String validateLogin(AuthRequest authReq) {
+        AuthRequest authRequest = authRepository.findByEmail(authReq.getEmail());
+        if (authRequest != null && authRequest.getPassword().equals(authReq.getPassword())) {
+            return jwtTokenGenerator.generateToken(authReq);
+        }
+        return null;
     }
 }

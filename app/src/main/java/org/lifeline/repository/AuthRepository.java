@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AuthRepository extends JpaRepository<AuthRequest, Long> {
-    Donor findByEmail(String email);
+    AuthRequest findByEmail(String email);
 }

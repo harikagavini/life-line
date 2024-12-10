@@ -22,7 +22,7 @@ const LoginForm = () => {
       const data = await response.json();
       if (data.success) {
         // Registration successful, redirect to login page
-        console.log('Login successful');
+        configuration.token = data.token;
         window.location.href = '/home';
       } else {
         setError(data.message);
