@@ -1,10 +1,13 @@
-import RegisterForm from '@/app/components/RegisterForm';
+import RegisterForm from "@/app/components/RegisterForm";
+import Navbar from "../components/NavBar";
 
 const RegisterPage = () => {
   return (
-    <div className="container mx-auto p-4 pt-6">
-      <h1 className="text-3xl font-bold mb-4">Lifeline</h1>
-      <RegisterForm />
+    <div className="landing-section">
+      <Navbar />
+      <div className="container mx-auto p-4 pt-6">
+        <RegisterForm />
+      </div>
     </div>
   );
 };

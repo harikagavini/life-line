@@ -42,9 +42,10 @@ const RegisterForm = () => {
           password,
         }),
       });
-      const data = await response.text();
+      const data = await response.json();
       if (data.success) {
         // Registration successful, redirect to login page
+        console.log('Registration successful');
         window.location.href = '/login';
       } else {
         setError(data.message);

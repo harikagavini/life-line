@@ -4,6 +4,7 @@ package org.lifeline.controllers;
 import org.lifeline.model.AuthRequest;
 import org.lifeline.model.Donor;
 import org.lifeline.repository.DonorRepository;
+import org.lifeline.response.RegistrationSuccess;
 import org.lifeline.service.DonorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,10 +20,12 @@ public class DonorController {
     private DonorRepository donorRepo;
 
     @PostMapping("/register")
-    @ResponseBody
-    public String registerDonor(@RequestBody Donor donor){
+    public RegistrationSuccess registerDonor(@RequestBody Donor donor){
         donorService.saveDonor(donor);
-        return "Registration Successful";
+        RegistrationSuccess registrationSuccess = new RegistrationSuccess();
+        registrationSuccess.setMessage("Registration success");
+        registrationSuccess.setSuccess(true);
+        return registrationSuccess;
     }
 
     @PostMapping("/login")
