@@ -4,7 +4,8 @@ package org.lifeline.controllers;
 import org.lifeline.model.AuthRequest;
 import org.lifeline.model.Donor;
 import org.lifeline.repository.DonorRepository;
-import org.lifeline.response.RegistrationSuccess;
+import org.lifeline.response.LoginResponse;
+import org.lifeline.response.RegistrationResponse;
 import org.lifeline.service.DonorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -20,25 +21,32 @@ public class DonorController {
     private DonorRepository donorRepo;
 
     @PostMapping("/register")
-    public RegistrationSuccess registerDonor(@RequestBody Donor donor){
+    public RegistrationResponse registerDonor(@RequestBody Donor donor){
         donorService.saveDonor(donor);
-        RegistrationSuccess registrationSuccess = new RegistrationSuccess();
-        registrationSuccess.setMessage("Registration success");
-        registrationSuccess.setSuccess(true);
-        return registrationSuccess;
+        RegistrationResponse registrationResponse = new RegistrationResponse();
+        registrationResponse.setMessage("Registration success");
+        registrationResponse.setSuccess(true);
+        return registrationResponse;
     }
 
     @PostMapping("/login")
-    public String loginUser(@RequestBody AuthRequest authReq) {
+    public LoginResponse loginUser(@RequestBody AuthRequest authReq) {
         if (donorService.validateLogin(authReq)) {
-            return "Login success";
+            return getLoginResponse("Login Success", true);
         }
         Donor donor = donorRepo.findByEmail(authReq.getEmail());
         if (donor == null) {
-            return "Email doesn't exist";
+            return getLoginResponse("Email doesn't exist", true);
         } else {
-            return "Login failed";
+            return getLoginResponse("Login Failed", true);
         }
+    }
+
+    private LoginResponse getLoginResponse(String msg, Boolean success) {
+        LoginResponse loginResponse = new LoginResponse();
+        loginResponse.setMessage(msg);
+        loginResponse.setSuccess(success);
+        return loginResponse;
     }
 
     @GetMapping("/home")

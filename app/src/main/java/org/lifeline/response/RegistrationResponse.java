@@ -3,11 +3,11 @@ package org.lifeline.response;
 import org.springframework.stereotype.Component;
 
 @Component
-public class RegistrationSuccess {
+public class RegistrationResponse {
     private String message;
     private boolean success;
 
-    public RegistrationSuccess() {
+    public RegistrationResponse() {
     }
 
     public String getMessage() {
