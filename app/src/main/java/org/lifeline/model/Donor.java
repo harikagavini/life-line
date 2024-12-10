@@ -16,10 +16,10 @@ public class Donor {
     private String last_name;
     @Column(name = "BloodType", nullable = false)
     private String blood_type;
-    @Column(name = "EmailId", nullable = false)
+    @Column(name = "EmailId", nullable = false, unique = true)
     private String email;
     @Column(name = "PhoneNumber", nullable = false)
-    private int phone_num;
+    private String phone_num;
     @Column(name = "DateOfBirth", nullable = false)
     private Date dob;
     @Column(name = "Street", nullable = false)
@@ -30,7 +30,6 @@ public class Donor {
     private String state;
     @Column(name = "ZipCode", nullable = false)
     private String zip;
-
     private String password;
 
     public Long getDonor_id() {
@@ -73,11 +72,11 @@ public class Donor {
         this.email = email;
     }
 
-    public int getPhone_num() {
+    public String getPhone_num() {
         return phone_num;
     }
 
-    public void setPhone_num(int phone_num) {
+    public void setPhone_num(String phone_num) {
         this.phone_num = phone_num;
     }
 
@@ -120,6 +119,7 @@ public class Donor {
     public void setDob(Date dob) {
         this.dob = dob;
     }
+
     public String getPassword() {
         return password;
     }

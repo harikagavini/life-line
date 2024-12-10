@@ -1,14 +1,17 @@
 package org.lifeline.model;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name="Auth")
 public class AuthRequest {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Long id;
+    @Column(name = "EmailId", nullable = false, unique = true)
     private String email;
+    @Column(name = "Password", nullable = false)
     private String password;
-
-    public AuthRequest(String email, String password) {
-        this.email = email;
-        this.password = password;
-    }
 
     public String getEmail() {
         return email;

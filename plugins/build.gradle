@@ -1,0 +1,58 @@
+plugins {
+    id 'jacoco'
+    id 'com.github.kt3k.coveralls' version '2.8.4'
+    id 'com.github.ben-manes.versions' version '0.51.0'
+    id 'java-gradle-plugin'
+}
+
+apply plugin: 'java-library'
+apply plugin: 'groovy'
+apply plugin: 'idea'
+apply plugin: 'maven-publish'
+apply plugin: 'signing'
+apply plugin: 'jacoco'
+
+version = '2.1.11'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation gradleApi()
+    implementation localGroovy()
+
+    api 'com.wix:wix-embedded-mysql:4.6.1'
+    api 'org.apache.commons:commons-lang3:3.9'
+
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'org.assertj:assertj-core:3.14.0'
+    testImplementation 'mysql:mysql-connector-java:8.0.18'
+}
+
+
+tasks.register('sourcesJar', Jar) {
+    dependsOn classes
+    archiveClassifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+tasks.register('javadocJar', Jar) {
+    dependsOn javadoc
+    archiveClassifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives sourcesJar
+    archives javadocJar
+}
+
+gradlePlugin {
+    plugins {
+        embeddedMysqlPlugin {
+            id = 'mysql.plugin'
+            implementationClass = 'uk.co.mruoc.mysql.EmbeddedMysqlPlugin'
+        }
+    }
+}
