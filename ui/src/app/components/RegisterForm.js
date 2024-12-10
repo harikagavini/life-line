@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { redirect } from 'next/navigation';
 import configuration from '@/app/config';
 
 const RegisterForm = () => {
@@ -17,6 +18,7 @@ const RegisterForm = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState(null);
+  const [submissionComplete, setSubmissionComplete] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -45,8 +47,8 @@ const RegisterForm = () => {
       const data = await response.json();
       if (data.success) {
         // Registration successful, redirect to login page
+        setSubmissionComplete(true);
         console.log('Registration successful');
-        window.location.href = '/login';
       } else {
         setError(data.message);
       }
@@ -54,6 +56,12 @@ const RegisterForm = () => {
       setError('Registration failed');
     }
   };
+
+  useEffect(() => {
+    if (submissionComplete) {
+      redirect('/login');
+    }
+  }, [submissionComplete]);
 
   return (
     <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-md">
