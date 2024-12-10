@@ -70,6 +70,7 @@ const RegisterForm = () => {
               type="text"
               value={firstName}
               onChange={(event) => setFirstName(event.target.value)}
+              required
             />
           </div>
           <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
@@ -82,6 +83,7 @@ const RegisterForm = () => {
               type="text"
               value={lastName}
               onChange={(event) => setLastName(event.target.value)}
+              required
             />
           </div>
         </div>
@@ -96,6 +98,7 @@ const RegisterForm = () => {
               type="text"
               value={bloodType}
               onChange={(event) => setBloodType(event.target.value)}
+              required
             />
           </div>
           <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
@@ -107,7 +110,9 @@ const RegisterForm = () => {
               id="email"
               type="email"
               value={email}
-              onChange={(event) => setEmail(event.target.value)}/>
+              onChange={(event) => setEmail(event.target.value)}
+              required
+            />
           </div>
         </div>
         <div className="flex flex-wrap -mx-3 mb-6">
@@ -185,6 +190,7 @@ const RegisterForm = () => {
               type="date"
               value={dob}
               onChange={(event) => setDob(event.target.value)}
+              required
             />
           </div>
         </div>
@@ -199,6 +205,7 @@ const RegisterForm = () => {
                 type="password"
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
+                required
               />
           </div>
           <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
@@ -211,6 +218,7 @@ const RegisterForm = () => {
               type="password"
               value={confirmPassword}
               onChange={(event) => setConfirmPassword(event.target.value)}
+              required
             />
           </div>
         </div>
