@@ -2,13 +2,16 @@ import Image from "next/image";
 
 const LandingSection = () => {
   return (
-    <div className="landing-section">
+    <div className="hero-container">
       <Image
         src="/lifeline.jpg"
-        alt="Your Image Alt Text"
-        width={400}
-        height={400}
+        alt="Image"
+        layout="fill"
+        objectFit="cover"
       />
+      <div className="hero-overlay">
+        Save life, one drop at a time
+      </div>
     </div>
   );
 };
