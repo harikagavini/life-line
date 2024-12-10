@@ -1,3 +1,5 @@
+"use client";
+
 import Head from 'next/head';
 import Navbar from '@/app/components/NavBar';
 import isLoggedIn from '@/app/utils/isLoggedIn';
@@ -12,7 +14,7 @@ export default function Feed() {
   ];
   console.log(Cookies.get('token'));
   if(!isLoggedIn(Cookies.get('token'))) {
-    // redirect('/login');
+    redirect('/login');
   }
   return (
     <div>

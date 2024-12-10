@@ -1,6 +1,8 @@
 package org.lifeline.controllers;
 
 
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import org.lifeline.model.AuthRequest;
 import org.lifeline.model.Donor;
 import org.lifeline.repository.DonorRepository;
@@ -8,6 +10,8 @@ import org.lifeline.response.LoginResponse;
 import org.lifeline.response.RegistrationResponse;
 import org.lifeline.service.DonorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -30,16 +34,20 @@ public class DonorController {
     }
 
     @PostMapping("/login")
-    public LoginResponse loginUser(@RequestBody AuthRequest authReq) {
+    public LoginResponse loginUser(@RequestBody AuthRequest authReq, HttpServletResponse response) {
         String token = donorService.validateLogin(authReq);
         if (token != null) {
+            // Set the cookie on the server-side
+            Cookie cookie = new Cookie("token", token);
+            cookie.setPath("/");
+            cookie.setHttpOnly(true);
+            response.addCookie(cookie);
+
+            // Return a redirect response
             return getLoginResponse("Login Success", true, token);
-        }
-        Donor donor = donorRepo.findByEmail(authReq.getEmail());
-        if (donor == null) {
-            return getLoginResponse("Email doesn't exist", true, null);
         } else {
-            return getLoginResponse("Login Failed", true, null);
+            // Return an error response
+            return getLoginResponse("Login Failed", false, null);
         }
     }
 

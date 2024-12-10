@@ -1,3 +1,5 @@
+"use client";
+
 import Head from 'next/head';
 import { redirect } from 'next/navigation';
 import Navbar from '@/app/components/NavBar';

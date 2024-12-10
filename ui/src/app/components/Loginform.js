@@ -1,13 +1,15 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import configuration from '@/app/config';
 import Cookies from 'js-cookie';
+import { redirect } from 'next/navigation';
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
+  const [submissionComplete, setSubmissionComplete] = useState(false);
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -22,8 +24,8 @@ const LoginForm = () => {
       const data = await response.json();
       if (data.success) {
         // Registration successful, redirect to login page
+        setSubmissionComplete(true);
         Cookies.set('token', data.token);
-        window.location.href = '/feed';
       } else {
         setError(data.message);
       }
@@ -31,6 +33,12 @@ const LoginForm = () => {
       setError('Login failed');
     }
   };
+
+  useEffect(() => {
+    if (submissionComplete) {
+      redirect('/feed');
+    }
+  }, [submissionComplete]);
 
   return (
     <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-md">

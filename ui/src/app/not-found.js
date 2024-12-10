@@ -2,7 +2,7 @@ import Navbar from "@/app/components/NavBar";
 
 export default function CatchAllNotFound() {
   const options = [
-    { href: '/home', label: 'Home' },
+    { href: '/', label: 'Home' },
     { href: '/login', label: 'Login' },
     { href: '/register', label: 'Registration' },
   ];
