@@ -31,10 +31,31 @@ const EventList = () => {
     fetchEvents();
   }, []);
 
-  const handleEdit = (event) => {
-    // Make a backend call to edit the event
-    console.log("Edit event:", event);
-    // Implement edit logic
+  const handleEdit = async (updatedEvent) => {
+    try {
+      const response = await fetch(`${configuration.BACKEND_URL}/lifeline/events/${updatedEvent.id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${Cookies.get('token')}`
+        },
+        body: JSON.stringify(updatedEvent),
+      });
+
+      if (response.ok) {
+        // Update the state with the edited event
+        setEvents((prevEvents) =>
+          prevEvents.map((event) => (event.eventId === updatedEvent.eventId ? updatedEvent : event))
+        );
+        return true;
+      } else {
+        console.error("Failed to update event");
+        return false;
+      }
+    } catch (error) {
+      console.error("Error updating event:", error);
+      return false;
+    }
   };
 
   const handleDelete = async (id) => {
