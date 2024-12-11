@@ -12,38 +12,45 @@ import java.util.Optional;
 public class EventsServiceImpl implements EventsService {
 
     @Autowired
-    private EventsRepository eventsRepo;
+    private EventsRepository eventsRepository;
+
+
 
     @Override
-    public Events createEvent(Events events) {
-        return eventsRepo.save(events);
+    public Events saveEvent(Events events) {
+
+        if(events.getName()== null || events.getEventDate() == null){
+            throw new IllegalArgumentException("Event name or date cannot be empty");
+        }
+
+        return eventsRepository.save(events);
     }
     @Override
     public List<Events> getAllEvents() {
-        return eventsRepo.findAll();
+        return eventsRepository.findAll();
     }
 
 
     @Override
     public Events updateEvent(Long event_id, String name, String bb_id, String street, String city, String state, String zip) {
-        Optional<Events> event = eventsRepo.findById(event_id);
+        Optional<Events> event = eventsRepository.findById(event_id);
 
         if (event.isPresent()) {
             Events eventupdate = event.get();
             eventupdate.setName(name);
-            eventupdate.setBb_id(bb_id);
+            eventupdate.setBranchId(bb_id);
             eventupdate.setStreet(street);
             eventupdate.setCity(city);
             eventupdate.setState(state);
             eventupdate.setZip(zip);  // Default to system date if eventDate is null
-            return eventsRepo.save(eventupdate);
+            return eventsRepository.save(eventupdate);
         }
         return null;
     }
 
     @Override
     public void deleteEvent(Long event_id) {
-        eventsRepo.deleteById(event_id);
+        eventsRepository.deleteById(event_id);
     }
 
 

@@ -1,6 +1,7 @@
 package org.lifeline.controllers;
 
 import org.lifeline.model.Events;
+import org.lifeline.response.EventResponse;
 import org.lifeline.service.EventsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,9 +18,12 @@ public class EventController {
     private EventsService eventsService;
 
     @PostMapping("/create")
-    public ResponseEntity<Events> createEvent(@RequestBody Events event) {
-        Events createdEvent = eventsService.createEvent(event);
-        return new ResponseEntity<>(createdEvent, HttpStatus.CREATED);
+    public EventResponse saveEvent(@RequestBody Events event) {
+        eventsService.saveEvent(event);
+        EventResponse eventResponse = new EventResponse();
+        eventResponse.setMessage("Event created");
+        eventResponse.setSuccess(true);
+        return eventResponse;
     }
 
     @GetMapping("/")

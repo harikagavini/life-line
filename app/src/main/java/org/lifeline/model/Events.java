@@ -13,9 +13,9 @@ public class Events {
     private Long event_id;
 
     private String name;
-    private Date event_date;
+    private Date eventDate;
 
-    private String bb_id;
+    private String branchId;
     private String street;
     private String city;
     private String state;
@@ -29,20 +29,20 @@ public class Events {
         this.name = name;
     }
 
-    public Date getEvent_date() {
-        return event_date;
+    public Date getEventDate() {
+        return eventDate;
     }
 
-    public void setEvent_date(Date event_date) {
-        this.event_date = event_date;
+    public void setEventDate(Date eventDate) {
+        this.eventDate = eventDate;
     }
 
-    public String getBb_id() {
-        return bb_id;
+    public String getBranchId() {
+        return branchId;
     }
 
-    public void setBb_id(String bb_id) {
-        this.bb_id = bb_id;
+    public void setBranchId(String branchId) {
+        this.branchId = branchId;
     }
 
     public String getStreet() {
