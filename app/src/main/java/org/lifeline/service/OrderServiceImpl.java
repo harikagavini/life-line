@@ -49,11 +49,11 @@ public class OrderServiceImpl implements OrderService{
         if (optionalOrder.isPresent()) {
             Order order = optionalOrder.get();
             order.setHospId(hosp_id);
-            order.setBranch_id(branch_id);
-            order.setBlood_type(blood_type);
+            order.setBranchId(branch_id);
+            order.setBloodType(blood_type);
             order.setQuantity(quantity);
             order.setStatus(status);  // Update status
-            order.setOrder_completed(status.equals("Completed") ? new Date() : order.getOrder_completed());  // Set completion date if status is 'Completed'
+            order.setOrderCompleted(status.equals("Completed") ? new Date() : order.getOrderCompleted());  // Set completion date if status is 'Completed'
 
             return orderRepo.save(order);
         } else {
