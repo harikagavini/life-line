@@ -9,7 +9,7 @@ import java.util.Date;
 public class Donor {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long donor_id;
+    private Long donorId;
     @Column(name = "FirstName", nullable = false)
     private String first_name;
     @Column(name = "LastName", nullable = false)
@@ -35,12 +35,12 @@ public class Donor {
     @Transient
     private String password;
 
-    public Long getDonor_id() {
-        return donor_id;
+    public Long getDonorId() {
+        return donorId;
     }
 
-    public void setDonor_id(Long donor_id) {
-        this.donor_id = donor_id;
+    public void setDonorId(Long donorId) {
+        this.donorId = donorId;
     }
 
     public String getFirst_name() {

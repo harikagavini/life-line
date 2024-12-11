@@ -7,30 +7,29 @@ import jakarta.persistence.*;
 public class Reward {
 
     @Id
-    @Column(name = "donor_id")
-    private Long donor_id;
-
-    private int tot_points;
+    @Column(name = "DonorId", nullable = false)
+    private Long donorId;
+    @Column(name = "TotalPoints", nullable = false)
+    private int totalPoints;
+    @Column(name = "Balance", nullable = false)
     private int balance;
 
     @OneToOne
-    @JoinColumn(name = "donor_id", referencedColumnName = "donor_id", insertable = false, updatable = false)
+    @JoinColumn(name = "DonorId", referencedColumnName = "donorId", insertable = false, updatable = false)
     private Donor donor;
 
-    public Long getDonor_id() {
-        return donor_id;
+    public Long getDonorId() {
+        return donorId;
+    }
+    public void setDonorId(Long donorId) {
+        this.donorId = donorId;
+    }
+    public int getTotalPoints() {
+        return totalPoints;
     }
 
-    public void setDonor_id(Long donor_id) {
-        this.donor_id = donor_id;
-    }
-
-    public int getTot_points() {
-        return tot_points;
-    }
-
-    public void setTot_points(int tot_points) {
-        this.tot_points = tot_points;
+    public void setTotalPoints(int totalPoints) {
+        this.totalPoints = totalPoints;
     }
 
     public int getBalance() {

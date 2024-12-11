@@ -8,53 +8,53 @@ import java.util.Date;
 @Table(name = "Orders")
 public class Order {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE) // Assuming order_id is auto-generated
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "OrderId")
-    private Long order_id;
+    private Long orderId;
 
     @Column(name = "HospId", nullable = false)
-    private String hosp_id;  // Hospital ID (varchar)
+    private String hospId;
 
     @Column(name = "BranchId", nullable = false)
-    private String branch_id;  // Branch ID (varchar)
+    private String branchId;
 
     @Column(name = "BloodType", nullable = false)
-    private String blood_type;  // Blood type (varchar)
+    private String bloodType;
 
     @Column(name = "Quantity", nullable = false)
-    private int quantity;  // Quantity of blood (int)
+    private int quantity;
 
     @Column(name = "Status", nullable = false)
-    private String status;  // Status of the order (string)
+    private String status;
 
     @Column(name = "OrderCreated", nullable = false)
-    private Date order_created;  // Timestamp when the order was created
+    private Date orderCreated;
 
     @Column(name = "OrderCompleted", nullable = true)
-    private Date order_completed;
+    private Date orderCompleted;
 
-    public String getHosp_id() {
-        return hosp_id;
+    public String getHospId() {
+        return hospId;
     }
 
-    public void setHosp_id(String hosp_id) {
-        this.hosp_id = hosp_id;
+    public void setHospId(String hospId) {
+        this.hospId = hospId;
     }
 
-    public String getBranch_id() {
-        return branch_id;
+    public String getBranchId() {
+        return branchId;
     }
 
-    public void setBranch_id(String branch_id) {
-        this.branch_id = branch_id;
+    public void setBranchId(String branchId) {
+        this.branchId = branchId;
     }
 
-    public String getBlood_type() {
-        return blood_type;
+    public String getBloodType() {
+        return bloodType;
     }
 
-    public void setBlood_type(String blood_type) {
-        this.blood_type = blood_type;
+    public void setBloodType(String bloodType) {
+        this.bloodType = bloodType;
     }
 
     public int getQuantity() {
@@ -73,19 +73,19 @@ public class Order {
         this.status = status;
     }
 
-    public Date getOrder_created() {
-        return order_created;
+    public Date getOrderCreated() {
+        return orderCreated;
     }
 
-    public void setOrder_created(Date order_created) {
-        this.order_created = order_created;
+    public void setOrderCreated(Date orderCreated) {
+        this.orderCreated = orderCreated;
     }
 
-    public Date getOrder_completed() {
-        return order_completed;
+    public Date getOrderCompleted() {
+        return orderCompleted;
     }
 
-    public void setOrder_completed(Date order_completed) {
-        this.order_completed = order_completed;
+    public void setOrderCompleted(Date orderCompleted) {
+        this.orderCompleted = orderCompleted;
     }
 }

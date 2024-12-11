@@ -18,7 +18,7 @@ public class OrderServiceImpl implements OrderService{
     @Override
     public Order createOrder(String hosp_id, String branch_id, String blood_type, int quantity) {
         Order order = new Order();
-        order.setHosp_id(hosp_id);
+        order.setHospId(hosp_id);
         order.setBranch_id(branch_id);
         order.setBlood_type(blood_type);
         order.setQuantity(quantity);
@@ -48,7 +48,7 @@ public class OrderServiceImpl implements OrderService{
 
         if (optionalOrder.isPresent()) {
             Order order = optionalOrder.get();
-            order.setHosp_id(hosp_id);
+            order.setHospId(hosp_id);
             order.setBranch_id(branch_id);
             order.setBlood_type(blood_type);
             order.setQuantity(quantity);

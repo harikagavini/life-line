@@ -10,15 +10,21 @@ public class Events {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long event_id;
+    private Long eventId;
 
+    @Column(name = "EventName", nullable = false)
     private String name;
+    @Column(name = "EventDate", nullable = false)
     private Date eventDate;
-
+    @Column(name = "BranchId", nullable = false)
     private String branchId;
+    @Column(name = "Street", nullable = false)
     private String street;
+    @Column(name = "City", nullable = false)
     private String city;
+    @Column(name = "State", nullable = false)
     private String state;
+    @Column(name = "Zip", nullable = false)
     private String zip;
 
     public String getName() {

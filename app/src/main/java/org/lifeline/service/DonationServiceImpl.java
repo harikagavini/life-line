@@ -24,10 +24,10 @@ public class DonationServiceImpl implements DonationService{
     public Donation createDonation(Donation donation) {
 
         int rewardPoints = donation.getQuantity();
-        Reward reward = rewardRepository.findById(donation.getReward().getDonor_id())
+        Reward reward = rewardRepository.findById(donation.getReward().getDonorId())
                 .orElseThrow(() -> new IllegalArgumentException("Donor not found"));
 
-        reward.setTot_points(reward.getTot_points() + rewardPoints);
+        reward.setTotalPoints(reward.getTotalPoints() + rewardPoints);
         reward.setBalance(reward.getBalance() + rewardPoints);
 
         rewardRepository.save(reward);
@@ -47,21 +47,20 @@ public class DonationServiceImpl implements DonationService{
 
         int oldQuantity = existingDonation.getQuantity();
         int newQuantity = updatedDonation.getQuantity();
-        existingDonation.setEvent_id(updatedDonation.getEvent_id());
-        existingDonation.setBb_id(updatedDonation.getBb_id());
+        existingDonation.setEventId(updatedDonation.getEventId());
         existingDonation.setQuantity(newQuantity);
-        existingDonation.setBlood_type(updatedDonation.getBlood_type());
-        existingDonation.setDonation_date(updatedDonation.getDonation_date());
+        existingDonation.setBloodType(updatedDonation.getBloodType());
+        existingDonation.setDonationDate(updatedDonation.getDonationDate());
 
         if (oldQuantity != newQuantity) {
             Donor donor = existingDonation.getReward().getDonor();
-            Reward donorReward = rewardRepository.findById(donor.getDonor_id())
+            Reward donorReward = rewardRepository.findById(donor.getDonorId())
                     .orElseThrow(() -> new IllegalArgumentException("Reward not found for donor"));
 
             int pointsPerUnit = 1;
             int pointsDifference = (newQuantity - oldQuantity) * pointsPerUnit;
 
-            donorReward.setTot_points(donorReward.getTot_points() + pointsDifference);
+            donorReward.setTotalPoints(donorReward.getTotalPoints() + pointsDifference);
             donorReward.setBalance(donorReward.getBalance() + pointsDifference);
 
             rewardRepository.save(donorReward);

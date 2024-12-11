@@ -16,8 +16,8 @@ public class HospitalLocation {
     private String name;
     @Column(name = "Email", nullable = false)
     private String email;
-    @Column(name="PhoneNum", nullable = false)
-    private String phone_num;
+    @Column(name= "PhoneNum", nullable = false)
+    private String phoneNum;
     @Column(name = "Street", nullable = false)
     private String street;
     @Column(name = "City", nullable = false)
@@ -46,12 +46,12 @@ public class HospitalLocation {
         this.email = email;
     }
 
-    public String getPhone_num() {
-        return phone_num;
+    public String getPhoneNum() {
+        return phoneNum;
     }
 
-    public void setPhone_num(String phone_num) {
-        this.phone_num = phone_num;
+    public void setPhoneNum(String phoneNum) {
+        this.phoneNum = phoneNum;
     }
 
     public String getStreet() {

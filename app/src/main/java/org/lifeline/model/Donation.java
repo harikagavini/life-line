@@ -1,7 +1,6 @@
 package org.lifeline.model;
 
 import jakarta.persistence.*;
-import org.springframework.boot.autoconfigure.web.WebProperties;
 
 import java.util.Date;
 
@@ -12,42 +11,26 @@ public class Donation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long donation_id;
-
-    private Long event_id;
-    private String bb_id;
-    private String hosp_id;
+    private Long donationId;
+    @Column(name = "EventId", nullable = false)
+    private Long eventId;
+    @Column(name = "Quantity", nullable = false)
     private int quantity;
-    private String blood_type;
-    private Date donation_date;
+    @Column(name = "BloodType", nullable = false)
+    private String bloodType;
+    @Column(name = "DonationDate", nullable = false)
+    private Date donationDate;
 
     @ManyToOne
-    @JoinColumn(name = "donor_id")
+    @JoinColumn(name = "donorId")
     private Reward reward;
 
-
-    public Long getEvent_id() {
-        return event_id;
+    public Long getEventId() {
+        return eventId;
     }
 
-    public void setEvent_id(Long event_id) {
-        this.event_id = event_id;
-    }
-
-    public String getBb_id() {
-        return bb_id;
-    }
-
-    public void setBb_id(String bb_id) {
-        this.bb_id = bb_id;
-    }
-
-    public String getHosp_id() {
-        return hosp_id;
-    }
-
-    public void setHosp_id(String hosp_id) {
-        this.hosp_id = hosp_id;
+    public void setEventId(Long eventId) {
+        this.eventId = eventId;
     }
 
     public int getQuantity() {
@@ -58,20 +41,20 @@ public class Donation {
         this.quantity = quantity;
     }
 
-    public String getBlood_type() {
-        return blood_type;
+    public String getBloodType() {
+        return bloodType;
     }
 
-    public void setBlood_type(String blood_type) {
-        this.blood_type = blood_type;
+    public void setBloodType(String bloodType) {
+        this.bloodType = bloodType;
     }
 
-    public Date getDonation_date() {
-        return donation_date;
+    public Date getDonationDate() {
+        return donationDate;
     }
 
-    public void setDonation_date(Date donation_date) {
-        this.donation_date = donation_date;
+    public void setDonationDate(Date donationDate) {
+        this.donationDate = donationDate;
     }
 
     public Reward getReward() {

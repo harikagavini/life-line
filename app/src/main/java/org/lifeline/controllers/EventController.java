@@ -26,15 +26,15 @@ public class EventController {
         return eventResponse;
     }
 
-    @GetMapping("/")
+    @GetMapping
     public ResponseEntity<List<Events>> getAllEvents() {
         List<Events> events = eventsService.getAllEvents();
         return new ResponseEntity<>(events, HttpStatus.OK);
     }
 
 
-    @PutMapping("/{event_id}")
-    public ResponseEntity<Events> updateEvent(@PathVariable Long event_id,
+    @PutMapping("/{eventId}")
+    public ResponseEntity<Events> updateEvent(@PathVariable Long eventId,
                                              @RequestParam String name,
                                              @RequestParam String bb_id,
                                              @RequestParam String street,
@@ -42,15 +42,18 @@ public class EventController {
                                              @RequestParam String state,
                                              @RequestParam String zip) {
 
-        Events updatedEvent = eventsService.updateEvent(event_id, name, bb_id, street, city, state, zip);
+        Events updatedEvent = eventsService.updateEvent(eventId, name, bb_id, street, city, state, zip);
 
         return updatedEvent != null ? ResponseEntity.ok(updatedEvent) : ResponseEntity.notFound().build();
     }
 
 
     @DeleteMapping("/{eventId}")
-    public ResponseEntity<Void> deleteEvent(@PathVariable Long event_id) {
-        eventsService.deleteEvent(event_id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    public EventResponse deleteEvent(@PathVariable Long eventId) {
+        eventsService.deleteEvent(eventId);
+        EventResponse eventResponse = new EventResponse();
+        eventResponse.setMessage("Event Deleted");
+        eventResponse.setSuccess(true);
+        return eventResponse;
     }
 }
