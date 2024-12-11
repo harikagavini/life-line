@@ -1,11 +1,12 @@
 package org.lifeline.service;
 
+import org.lifeline.dto.OrderDTO;
+import org.lifeline.model.Events;
 import org.lifeline.model.Order;
 import org.lifeline.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,60 +14,36 @@ import java.util.Optional;
 public class OrderServiceImpl implements OrderService{
 
     @Autowired
-    private OrderRepository orderRepo;
+    private OrderRepository orderRepository;
 
     @Override
-    public Order createOrder(String hosp_id, String branch_id, String blood_type, int quantity) {
-        Order order = new Order();
-        order.setHospId(hosp_id);
-        order.setBranchId(branch_id);
-        order.setBloodType(blood_type);
-        order.setQuantity(quantity);
-        order.setStatus("Pending");  // Initial status is Pending
-        order.setOrderCreated(new Date());  // Set order creation time
-        order.setOrderCompleted(null);  // Order is not completed initially
+    public Order saveOrder(Order order) {
 
-        return orderRepo.save(order);  // Save and return the created order
+        if(order.getBranchId()== null || order.getHospId() == null || order.getBloodType() == null || order.getQuantity() == 0){
+            throw new IllegalArgumentException("Required details must be filled");
+        }
+
+        return orderRepository.save(order);
     }
 
     @Override
-    public Order getOrderById(Long order_id) {
+    public List<Order> getAllOrders(){
+        return orderRepository.findAll();
+    }
+
+    @Override
+    public Order updateOrder(OrderDTO orderDTO){
+        Optional<Order> order = orderRepository.findById(orderDTO.getOrderId());
+
+        if(order.isPresent()) {
+
+            Order updateOrder = order.get();
+            updateOrder.setQuantity(orderDTO.getQuantity());
+            updateOrder.setBloodType(orderDTO.getBloodType());
+            updateOrder.setStatus(orderDTO.getStatus());
+            updateOrder.setBranchId(orderDTO.getBranchId());
+            return orderRepository.save(updateOrder);
+        }
         return null;
-    }
-
-    @Override
-    public List<Order> getAllOrder() {
-        return orderRepo.findAll();
-    }
-    @Override
-    public List<Order> getOrderByStatus(String status) {
-        return orderRepo.findByStatus(status);
-    }
-    @Override
-    public Order updateOrder(Long order_id, String hosp_id, String branch_id, String blood_type, int quantity, String status) {
-        Optional<Order> optionalOrder = orderRepo.findById(order_id);
-
-        if (optionalOrder.isPresent()) {
-            Order order = optionalOrder.get();
-            order.setHospId(hosp_id);
-            order.setBranchId(branch_id);
-            order.setBloodType(blood_type);
-            order.setQuantity(quantity);
-            order.setStatus(status);  // Update status
-            order.setOrderCompleted(status.equals("Completed") ? new Date() : order.getOrderCompleted());  // Set completion date if status is 'Completed'
-
-            return orderRepo.save(order);
-        } else {
-            throw new RuntimeException("Order not found with ID: " + order_id);
-        }
-    }
-    @Override
-    public boolean deleteOrder(Long order_id) {
-        if (orderRepo.existsById(order_id)) {
-            orderRepo.deleteById(order_id);
-            return true;
-        } else {
-            return false;
-        }
     }
 }
