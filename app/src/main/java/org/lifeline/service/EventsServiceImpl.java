@@ -37,7 +37,7 @@ public class EventsServiceImpl implements EventsService {
         Optional<Events> event = eventsRepository.findById(eventDTO.getEventId());
 
         if (event.isPresent()) {
-            Events eventUpdate = new Events();
+            Events eventUpdate = event.get();
             eventUpdate.setEventDate(eventDTO.getEventDate());
             eventUpdate.setStreet(eventDTO.getStreet());
             eventUpdate.setCity(eventDTO.getCity());

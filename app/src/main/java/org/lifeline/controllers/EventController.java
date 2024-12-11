@@ -36,9 +36,7 @@ public class EventController {
 
     @PutMapping("/{eventId}")
     public EventResponse updateEvent(@RequestBody EventDTO eventDTO) {
-
         Events updatedEvent = eventsService.updateEvent(eventDTO);
-
         EventResponse eventResponse = new EventResponse();
         eventResponse.setMessage("Event updated");
         eventResponse.setSuccess(true);
