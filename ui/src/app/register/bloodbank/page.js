@@ -1,3 +1,5 @@
+"use client";
+
 import BloodBankRegisterForm from "@/app/components/BloodBankRegisterForm";
 import Navbar from "@/app/components/NavBar";
 import isLoggedIn from "@/app/utils/isLoggedIn";

@@ -1,3 +1,5 @@
+"use client";
+
 import Navbar from "../components/NavBar";
 import Registration from "../components/Registration";
 import isLoggedIn from "../utils/isLoggedIn";

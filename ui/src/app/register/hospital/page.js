@@ -1,3 +1,5 @@
+"use client";
+
 import HospitalRegistrationForm from "@/app/components/HospitalRegistrationForm";
 import Navbar from "@/app/components/NavBar";
 import isLoggedIn from "@/app/utils/isLoggedIn";

@@ -4,10 +4,21 @@ import React, { useState, useEffect } from 'react';
 import { redirect } from 'next/navigation';
 import configuration from '@/app/config';
 
+const types = [
+  { value: 'A+', label: 'A+' },
+  { value: 'A-', label: 'A-' },
+  { value: 'B+', label: 'B+' },
+  { value: 'B-', label: 'B-' },
+  { value: 'AB+', label: 'AB+' },
+  { value: 'AB-', label: 'AB-' },
+  { value: 'O+', label: 'O-' },
+  { value: 'O-', label: 'O-' },
+];
+
 const DonorRegisterForm = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
-  const [bloodType, setBloodType] = useState('');
+  const [bloodType, setBloodType] = useState(types[0].value);
   const [email, setEmail] = useState('');
   const [phoneNum, setPhoneNum] = useState('');
   const [street, setStreet] = useState('');
@@ -20,10 +31,44 @@ const DonorRegisterForm = () => {
   const [error, setError] = useState(null);
   const [submissionComplete, setSubmissionComplete] = useState(false);
 
+  const validateDateOfBirth = (inputDate) => {
+    const today = new Date();
+    const enteredDate = new Date(inputDate);
+  
+    // Check if the entered date is valid
+    if (isNaN(enteredDate)) {
+      setError("Invalid date. Please enter a valid date.");
+      return false;
+    }
+  
+    // Check if the entered date is in the future
+    if (enteredDate > today) {
+      setError("Date of birth cannot be in the future.");
+      return false;
+    }
+  
+    // Check if the user is at least 18 years old
+    const age = today.getFullYear() - enteredDate.getFullYear();
+    const ageMonthDiff = today.getMonth() - enteredDate.getMonth();
+    const ageDayDiff = today.getDate() - enteredDate.getDate();
+    if (age < 18 || (age === 18 && (ageMonthDiff < 0 || (ageMonthDiff === 0 && ageDayDiff < 0)))) {
+      setError("You must be at least 18 years old.");
+      return false;
+    }
+  
+    // Clear the error if all validations pass
+    setError("");
+    return true;
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (password !== confirmPassword) {
       setError('Passwords do not match');
+      return;
+    }
+    if(!validateDateOfBirth(dob)){
+      setError("Invalid date. Please enter a valid date.");
       return;
     }
     try {
@@ -96,18 +141,23 @@ const DonorRegisterForm = () => {
           </div>
         </div>
         <div className="flex flex-wrap -mx-3 mb-6">
-          <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="blood_type">
+        <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="registrationType">
               Blood Type
             </label>
-            <input
+            <select
               className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              id="blood_type"
-              type="text"
+              id="bloodType"
               value={bloodType}
               onChange={(event) => setBloodType(event.target.value)}
               required
-            />
+            >
+              {types.map((type) => (
+                <option key={type.value} value={type.value}>
+                  {type.label}
+                </option>
+              ))}
+            </select>
           </div>
           <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
             <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="email">

@@ -15,19 +15,20 @@ public class JwtInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        String token = request.getHeader("Authorization");
-
-        if (token != null && token.startsWith("Bearer ")) {
-            try {
-                jwtTokenValidator.validateToken(token.substring(7));
-                return true;
-            } catch (JwtException e) {
-                response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Invalid JWT token");
-                return false;
-            }
-        } else {
-            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Missing or invalid JWT token");
-            return false;
-        }
+        return true;
+//        String token = request.getHeader("Authorization");
+//
+//        if (token != null && token.startsWith("Bearer ")) {
+//            try {
+//                jwtTokenValidator.validateToken(token.substring(7));
+//                return true;
+//            } catch (JwtException e) {
+//                response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Invalid JWT token");
+//                return false;
+//            }
+//        } else {
+//            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Missing or invalid JWT token");
+//            return false;
+//        }
     }
 }

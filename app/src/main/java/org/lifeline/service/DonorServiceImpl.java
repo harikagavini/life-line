@@ -35,7 +35,7 @@ public class DonorServiceImpl implements DonorService {
         AuthRequest authRequest = new AuthRequest();
         authRequest.setEmail(donor.getEmail());
         authRequest.setPassword(donor.getPassword());
-        authRequest.setRegistrationType(RegistrationType.BLOOD_BANK);
+        authRequest.setRegistrationType(RegistrationType.DONOR);
         authRepository.save(authRequest);
 
         return savedModel;

@@ -9,6 +9,7 @@ import { redirect } from 'next/navigation';
 export default function Feed() {
   const options = [
     { href: '/', label: 'Home' },
+    { href: '/events', label: 'Events' },
     { href: '/profile', label: 'Profile' },
     { href: '/signout', label: 'SignOut' },
   ];

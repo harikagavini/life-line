@@ -1,3 +1,5 @@
+"use client";
+
 import LoginForm from "@/app/components/Loginform";
 import Navbar from "../components/NavBar";
 import { redirect } from 'next/navigation';

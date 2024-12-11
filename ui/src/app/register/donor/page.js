@@ -1,3 +1,5 @@
+"use client";
+
 import DonorRegisterForm from "@/app/components/DonorRegisterForm";
 import Navbar from "@/app/components/NavBar";
 import isLoggedIn from "@/app/utils/isLoggedIn";
