@@ -40,4 +40,12 @@ public class AuthRequest {
     public void setRegistrationType(RegistrationType registrationType) {
         this.registrationType = registrationType;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

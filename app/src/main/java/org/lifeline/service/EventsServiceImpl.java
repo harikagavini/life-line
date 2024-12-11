@@ -1,5 +1,6 @@
 package org.lifeline.service;
 
+import org.lifeline.dto.EventDTO;
 import org.lifeline.model.Events;
 import org.lifeline.repository.EventsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,18 +33,17 @@ public class EventsServiceImpl implements EventsService {
 
 
     @Override
-    public Events updateEvent(Long event_id, String name, String bb_id, String street, String city, String state, String zip) {
-        Optional<Events> event = eventsRepository.findById(event_id);
+    public Events updateEvent(EventDTO eventDTO) {
+        Optional<Events> event = eventsRepository.findById(eventDTO.getEventId());
 
         if (event.isPresent()) {
-            Events eventupdate = event.get();
-            eventupdate.setName(name);
-            eventupdate.setBranchId(bb_id);
-            eventupdate.setStreet(street);
-            eventupdate.setCity(city);
-            eventupdate.setState(state);
-            eventupdate.setZip(zip);  // Default to system date if eventDate is null
-            return eventsRepository.save(eventupdate);
+            Events eventUpdate = new Events();
+            eventUpdate.setEventDate(eventDTO.getEventDate());
+            eventUpdate.setStreet(eventDTO.getStreet());
+            eventUpdate.setCity(eventDTO.getCity());
+            eventUpdate.setState(eventDTO.getState());
+            eventUpdate.setZip(eventDTO.getZip());  // Default to system date if eventDate is null
+            return eventsRepository.save(eventUpdate);
         }
         return null;
     }

@@ -1,5 +1,6 @@
 package org.lifeline.controllers;
 
+import org.lifeline.dto.EventDTO;
 import org.lifeline.model.Events;
 import org.lifeline.response.EventResponse;
 import org.lifeline.service.EventsService;
@@ -34,17 +35,14 @@ public class EventController {
 
 
     @PutMapping("/{eventId}")
-    public ResponseEntity<Events> updateEvent(@PathVariable Long eventId,
-                                             @RequestParam String name,
-                                             @RequestParam String bb_id,
-                                             @RequestParam String street,
-                                             @RequestParam String city,
-                                             @RequestParam String state,
-                                             @RequestParam String zip) {
+    public EventResponse updateEvent(@RequestBody EventDTO eventDTO) {
 
-        Events updatedEvent = eventsService.updateEvent(eventId, name, bb_id, street, city, state, zip);
+        Events updatedEvent = eventsService.updateEvent(eventDTO);
 
-        return updatedEvent != null ? ResponseEntity.ok(updatedEvent) : ResponseEntity.notFound().build();
+        EventResponse eventResponse = new EventResponse();
+        eventResponse.setMessage("Event updated");
+        eventResponse.setSuccess(true);
+        return eventResponse;
     }
 
 
