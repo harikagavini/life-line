@@ -1,6 +1,9 @@
 package org.lifeline.model;
 
 import jakarta.persistence.*;
+import jdk.jshell.Snippet;
+import org.lifeline.enums.BloodType;
+import org.lifeline.enums.StatusType;
 
 import java.util.Date;
 
@@ -19,13 +22,15 @@ public class Order {
     private String branchId;
 
     @Column(name = "BloodType", nullable = false)
-    private String bloodType;
+    @Enumerated(EnumType.STRING)
+    private BloodType bloodType;
 
     @Column(name = "Quantity", nullable = false)
     private int quantity;
 
     @Column(name = "Status", nullable = false)
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private StatusType status;
 
     @Column(name = "OrderCreated", nullable = false)
     private Date orderCreated;
@@ -49,11 +54,11 @@ public class Order {
         this.branchId = branchId;
     }
 
-    public String getBloodType() {
+    public BloodType getBloodType() {
         return bloodType;
     }
 
-    public void setBloodType(String bloodType) {
+    public void setBloodType(BloodType bloodType) {
         this.bloodType = bloodType;
     }
 
@@ -65,11 +70,11 @@ public class Order {
         this.quantity = quantity;
     }
 
-    public String getStatus() {
+    public StatusType getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(StatusType status) {
         this.status = status;
     }
 
