@@ -64,4 +64,12 @@ public class Donation {
     public void setReward(Reward reward) {
         this.reward = reward;
     }
+
+    public Long getDonationId() {
+        return donationId;
+    }
+
+    public void setDonationId(Long donationId) {
+        this.donationId = donationId;
+    }
 }

@@ -88,4 +88,12 @@ public class Order {
     public void setOrderCompleted(Date orderCompleted) {
         this.orderCompleted = orderCompleted;
     }
+
+    public Long getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(Long orderId) {
+        this.orderId = orderId;
+    }
 }
