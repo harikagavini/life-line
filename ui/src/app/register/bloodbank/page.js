@@ -1,7 +1,7 @@
-import Navbar from "../components/NavBar";
-import Registration from "../components/Registration";
+import BloodBankRegisterForm from "@/app/components/BloodBankRegisterForm";
+import Navbar from "@/app/components/NavBar";
 
-const RegisterPage = () => {
+const BloodBankRegisterPage = () => {
   const options = [
     { href: '/', label: 'Home' },
     { href: '/login', label: 'Login' },
@@ -11,10 +11,10 @@ const RegisterPage = () => {
     <div className="landing-section">
       <Navbar options={options}/>
       <div className="container mx-auto p-4 pt-6">
-        <Registration />
+        <BloodBankRegisterForm />
       </div>
     </div>
   );
 };
 
-export default RegisterPage;
+export default BloodBankRegisterPage;

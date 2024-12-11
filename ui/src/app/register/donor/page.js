@@ -1,7 +1,7 @@
-import Navbar from "../components/NavBar";
-import Registration from "../components/Registration";
+import DonorRegisterForm from "@/app/components/DonorRegisterForm";
+import Navbar from "@/app/components/NavBar";
 
-const RegisterPage = () => {
+const DonorRegisterPage = () => {
   const options = [
     { href: '/', label: 'Home' },
     { href: '/login', label: 'Login' },
@@ -11,10 +11,10 @@ const RegisterPage = () => {
     <div className="landing-section">
       <Navbar options={options}/>
       <div className="container mx-auto p-4 pt-6">
-        <Registration />
+        <DonorRegisterForm />
       </div>
     </div>
   );
 };
 
-export default RegisterPage;
+export default DonorRegisterPage;

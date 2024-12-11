@@ -1,6 +1,7 @@
 package org.lifeline.model;
 
 import jakarta.persistence.*;
+import org.lifeline.enums.RegistrationType;
 
 @Entity
 @Table(name="Auth")
@@ -12,6 +13,9 @@ public class AuthRequest {
     private String email;
     @Column(name = "Password", nullable = false)
     private String password;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "Type", nullable = false)
+    private RegistrationType registrationType;
 
     public String getEmail() {
         return email;
@@ -27,5 +31,13 @@ public class AuthRequest {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public RegistrationType getRegistrationType() {
+        return registrationType;
+    }
+
+    public void setRegistrationType(RegistrationType registrationType) {
+        this.registrationType = registrationType;
     }
 }

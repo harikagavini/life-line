@@ -3,17 +3,16 @@ import org.lifeline.enums.RegistrationType;
 import org.lifeline.jwt.JwtTokenGenerator;
 import org.lifeline.model.AuthRequest;
 import org.lifeline.model.BloodBank;
-import org.lifeline.model.Donor;
 import org.lifeline.repository.AuthRepository;
-import org.lifeline.repository.DonorRepository;
+import org.lifeline.repository.BloodBankRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class DonorServiceImpl implements DonorService {
+public class BloodBankServiceImpl implements BloodBankService {
 
     @Autowired
-    private DonorRepository donorRepository;
+    private BloodBankRepository bloodBankRepository;
 
     @Autowired
     private AuthRepository authRepository;
@@ -22,19 +21,19 @@ public class DonorServiceImpl implements DonorService {
     private JwtTokenGenerator jwtTokenGenerator;
 
     @Override
-    public Donor saveDonor(Donor donor) {
-        if(donor.getEmail() == null || donor.getPassword() == null) {
-            throw new IllegalArgumentException("Email or password cannot be empty");
+    public BloodBank saveBloodBank(BloodBank bloodBank) {
+        if(bloodBank.getEmail() == null || bloodBank.getPassword() == null || bloodBank.getBranchId() == null) {
+            throw new IllegalArgumentException("Email or password or branch id cannot be empty");
         }
-        if(authRepository.findByEmail(donor.getEmail()) != null) {
+        if(authRepository.findByEmail(bloodBank.getEmail()) != null) {
             throw new IllegalStateException("The email is already registered in the system, please use another email");
         }
 
-        Donor savedModel = donorRepository.save(donor);
+        BloodBank savedModel = bloodBankRepository.save(bloodBank);
 
         AuthRequest authRequest = new AuthRequest();
-        authRequest.setEmail(donor.getEmail());
-        authRequest.setPassword(donor.getPassword());
+        authRequest.setEmail(bloodBank.getEmail());
+        authRequest.setPassword(bloodBank.getPassword());
         authRequest.setRegistrationType(RegistrationType.BLOOD_BANK);
         authRepository.save(authRequest);
 

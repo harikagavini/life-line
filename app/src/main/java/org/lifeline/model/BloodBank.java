@@ -8,33 +8,26 @@ public class BloodBank {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long branch_id;
-
-    private String bb_id;
+    private Long id;
+    @Column(name = "BranchId", nullable = false, unique = true)
+    private String branchId;
+    @Column(name = "Name", nullable = false)
     private String name;
+    @Column(name = "Email", nullable = false)
     private String email;
+    @Column(name="PhoneNum", nullable = false)
     private String phone_num;
+    @Column(name = "Street", nullable = false)
     private String street;
+    @Column(name = "City", nullable = false)
     private String city;
+    @Column(name = "State", nullable = false)
     private String state;
+    @Column(name = "ZipCode", nullable = false)
     private String zip;
+    @Transient
+    private String password;
 
-
-    public Long getBranch_id() {
-        return branch_id;
-    }
-
-    public void setBranch_id(Long branch_id) {
-        this.branch_id = branch_id;
-    }
-
-    public String getBb_id() {
-        return bb_id;
-    }
-
-    public void setBb_id(String bb_id) {
-        this.bb_id = bb_id;
-    }
 
     public String getName() {
         return name;
@@ -90,5 +83,29 @@ public class BloodBank {
 
     public void setZip(String zip) {
         this.zip = zip;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getBranchId() {
+        return branchId;
+    }
+
+    public void setBranchId(String branchId) {
+        this.branchId = branchId;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

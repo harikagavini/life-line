@@ -30,6 +30,9 @@ public class Donor {
     private String state;
     @Column(name = "ZipCode", nullable = false)
     private String zip;
+    @Column(name = "totalDonated", nullable = true)
+    private int totalDonated;
+    @Transient
     private String password;
 
     public Long getDonor_id() {
@@ -126,5 +129,13 @@ public class Donor {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public int getTotalDonated() {
+        return totalDonated;
+    }
+
+    public void setTotalDonated(int totalDonated) {
+        this.totalDonated = totalDonated;
     }
 }

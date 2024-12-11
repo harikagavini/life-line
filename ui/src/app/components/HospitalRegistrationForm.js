@@ -4,17 +4,15 @@ import React, { useState, useEffect } from 'react';
 import { redirect } from 'next/navigation';
 import configuration from '@/app/config';
 
-const RegisterForm = () => {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [bloodType, setBloodType] = useState('');
+const HospitalRegistrationForm = () => {
+  const [hospitalId, setHospitalId] = useState('');
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phoneNum, setPhoneNum] = useState('');
   const [street, setStreet] = useState('');
   const [city, setCity] = useState('');
   const [state, setState] = useState('');
   const [zip, setZip] = useState('');
-  const [dob, setDob] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState(null);
@@ -27,20 +25,18 @@ const RegisterForm = () => {
       return;
     }
     try {
-      const response = await fetch(`${configuration.BACKEND_URL}/lifeline/register`, {
+      const response = await fetch(`${configuration.BACKEND_URL}/lifeline/register/hospital`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          first_name: firstName,
-          last_name: lastName,
-          blood_type: bloodType,
+          hospitalId,
+          name,
           email,
           phone_num: phoneNum,
           street,
           city,
           state,
           zip,
-          dob,
           password,
         }),
       });
@@ -65,50 +61,37 @@ const RegisterForm = () => {
 
   return (
     <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-md">
-      <h2 className="text-2xl font-bold mb-4">Register</h2>
+      <h2 className="text-2xl font-bold mb-4">Blood Bank Registration</h2>
       <form onSubmit={handleSubmit}>
         <div className="flex flex-wrap -mx-3 mb-6">
           <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
             <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="first_name">
-              First Name
+              Hospital Id
             </label>
             <input
               className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              id="first_name"
+              id="hospital_id"
               type="text"
-              value={firstName}
-              onChange={(event) => setFirstName(event.target.value)}
+              value={hospitalId}
+              onChange={(event) => setHospitalId(event.target.value)}
               required
             />
           </div>
           <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
             <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="last_name">
-              Last Name
+              Name
             </label>
             <input
               className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              id="last_name"
+              id="name"
               type="text"
-              value={lastName}
-              onChange={(event) => setLastName(event.target.value)}
+              value={name}
+              onChange={(event) => setName(event.target.value)}
               required
             />
           </div>
         </div>
         <div className="flex flex-wrap -mx-3 mb-6">
-          <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="blood_type">
-              Blood Type
-            </label>
-            <input
-              className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              id="blood_type"
-              type="text"
-              value={bloodType}
-              onChange={(event) => setBloodType(event.target.value)}
-              required
-            />
-          </div>
           <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
             <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="email">
               Email
@@ -122,8 +105,6 @@ const RegisterForm = () => {
               required
             />
           </div>
-        </div>
-        <div className="flex flex-wrap -mx-3 mb-6">
           <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
             <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="phone_num">
               Phone Number
@@ -136,6 +117,8 @@ const RegisterForm = () => {
               onChange={(event) => setPhoneNum(event.target.value)}
             />
           </div>
+        </div>
+        <div className="flex flex-wrap -mx-3 mb-6">
           <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
             <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="street">
               Street
@@ -148,8 +131,6 @@ const RegisterForm = () => {
               onChange={(event) => setStreet(event.target.value)}
             />
           </div>
-        </div>
-        <div className="flex flex-wrap -mx-3 mb-6">
           <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
             <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="city">
               City
@@ -162,6 +143,8 @@ const RegisterForm = () => {
               onChange={(event) => setCity(event.target.value)}
             />
           </div>
+        </div>
+        <div className="flex flex-wrap -mx-3 mb-6">
           <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
             <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="state">
               State
@@ -174,8 +157,6 @@ const RegisterForm = () => {
               onChange={(event) => setState(event.target.value)}
             />
           </div>
-        </div>
-        <div className="flex flex-wrap -mx-3 mb-6">
           <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
             <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="zip">
               Zip
@@ -186,19 +167,6 @@ const RegisterForm = () => {
               type="text"
               value={zip}
               onChange={(event) => setZip(event.target.value)}
-            />
-          </div>
-          <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="dob">
-              Date of Birth
-            </label>
-            <input
-              className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              id="dob"
-              type="date"
-              value={dob}
-              onChange={(event) => setDob(event.target.value)}
-              required
             />
           </div>
         </div>
@@ -242,4 +210,4 @@ const RegisterForm = () => {
   );
 };
 
-export default RegisterForm;
+export default HospitalRegistrationForm;
