@@ -1,5 +1,7 @@
 import Navbar from "../components/NavBar";
 import Registration from "../components/Registration";
+import isLoggedIn from "../utils/isLoggedIn";
+import Cookies from "js-cookie";
 
 const RegisterPage = () => {
   const options = [
@@ -7,6 +9,10 @@ const RegisterPage = () => {
     { href: '/login', label: 'Login' },
     { href: '/register', label: 'Registration' },
   ];
+  console.log(`Token: ${Cookies.get('token')}`);
+  if(isLoggedIn(Cookies.get('token'))) {
+    redirect('/feed');
+  }
   return (
     <div className="landing-section">
       <Navbar options={options}/>

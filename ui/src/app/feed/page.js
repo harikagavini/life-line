@@ -12,7 +12,7 @@ export default function Feed() {
     { href: '/profile', label: 'Profile' },
     { href: '/signout', label: 'SignOut' },
   ];
-  console.log(Cookies.get('token'));
+
   if(!isLoggedIn(Cookies.get('token'))) {
     redirect('/login');
   }

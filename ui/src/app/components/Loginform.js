@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import configuration from '@/app/config';
 import Cookies from 'js-cookie';
 import { redirect } from 'next/navigation';
+import isLoggedIn from '@/app/utils/isLoggedIn';
 
 const types = [
   { value: 'DONOR', label: 'Donor' },
@@ -43,7 +44,7 @@ const LoginForm = () => {
   };
 
   useEffect(() => {
-    if (submissionComplete) {
+    if (isLoggedIn(Cookies.get('token'))) {
       redirect('/feed');
     }
   }, [submissionComplete]);

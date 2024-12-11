@@ -1,5 +1,7 @@
 import HospitalRegistrationForm from "@/app/components/HospitalRegistrationForm";
 import Navbar from "@/app/components/NavBar";
+import isLoggedIn from "@/app/utils/isLoggedIn";
+import Cookies from "js-cookie";
 
 const HospitalRegisterPage = () => {
   const options = [
@@ -7,6 +9,9 @@ const HospitalRegisterPage = () => {
     { href: '/login', label: 'Login' },
     { href: '/register', label: 'Registration' },
   ];
+  if(isLoggedIn(Cookies.get('token'))) {
+    redirect('/feed');
+  }
   return (
     <div className="landing-section">
       <Navbar options={options}/>

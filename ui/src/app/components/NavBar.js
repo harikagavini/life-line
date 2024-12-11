@@ -7,6 +7,7 @@ const Navbar = ({ options }) => {
   const [toggle, setToggle] = useState(false);
 
   const handleToggle = () => {
+    console.log("Toggle clicked");
     setToggle(!toggle);
   };
 

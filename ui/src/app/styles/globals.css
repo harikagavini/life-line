@@ -27,6 +27,7 @@ body {
   display: flex;
   align-items: center;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  justify-content: space-between;
 }
 
 .navbar .logo {
@@ -34,67 +35,9 @@ body {
   font-size: 1.5em;
 }
 
-.navbar .nav-links {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  margin-left: auto;
-}
-
-.navbar .nav-links li {
-  margin-right: 20px;
-}
-
-.navbar .nav-links a {
-  color: #fff;
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
-
-.navbar .nav-links a:hover {
-  color: #ccc;
-}
-
-/* Responsive Design */
-
-@media (max-width: 768px) {
-  .navbar .nav-links {
-    flex-direction: column;
-  }
-  .navbar .nav-links li {
-    margin-right: 0;
-  }
-}
-
-.centered {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  text-align: center;
-}
-
-.hero-container {
-  position: relative;
-  width: 100%;
-  height: 100vh;
-}
-
-.hero-overlay {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: #fff;
-  text-align: center;
-}
-
 .nav-links-dropdown {
-  position: absolute;
-  right: 20px;
-  top: 5%;
-  transform: translateY(-50%);
+  position: relative;
+  margin-left: auto;
 }
 
 .dropdown-toggle {
@@ -113,11 +56,19 @@ body {
 .dropdown-menu {
   position: absolute;
   top: 100%;
-  left: 0;
+  right: 0;
   background-color: #f9f9f9;
   padding: 10px;
   border: 1px solid #ccc;
   display: none;
+  opacity: 0;
+  transition: opacity 0.3s ease, display 0.3s ease;
+  z-index: 1000;
+}
+
+.nav-links-dropdown:hover .dropdown-menu {
+  display: block;
+  opacity: 1;
 }
 
 .dropdown-menu li {
@@ -133,6 +84,33 @@ body {
   color: #23527c;
 }
 
-.nav-links-dropdown:hover .dropdown-menu {
-  display: block;
+/* Responsive Design */
+
+@media (max-width: 768px) {
+  .navbar .dropdown-menu li {
+    margin-right: 0;
+  }
+}
+
+.centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+}
+
+.landing-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+
+.landing-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  text-align: center;
 }
