@@ -19,12 +19,12 @@ public class OrderServiceImpl implements OrderService{
     public Order createOrder(String hosp_id, String branch_id, String blood_type, int quantity) {
         Order order = new Order();
         order.setHospId(hosp_id);
-        order.setBranch_id(branch_id);
-        order.setBlood_type(blood_type);
+        order.setBranchId(branch_id);
+        order.setBloodType(blood_type);
         order.setQuantity(quantity);
         order.setStatus("Pending");  // Initial status is Pending
-        order.setOrder_created(new Date());  // Set order creation time
-        order.setOrder_completed(null);  // Order is not completed initially
+        order.setOrderCreated(new Date());  // Set order creation time
+        order.setOrderCompleted(null);  // Order is not completed initially
 
         return orderRepo.save(order);  // Save and return the created order
     }
