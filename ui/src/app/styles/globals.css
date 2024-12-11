@@ -189,3 +189,11 @@ body {
     width: 100%;
   }
 }
+
+.event-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1em;
+  justify-content: center;
+  padding: 1em;
+}

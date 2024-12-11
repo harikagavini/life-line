@@ -4,6 +4,7 @@ import Navbar from "@/app/components/NavBar";
 import isLoggedIn from "@/app/utils/isLoggedIn";
 import Cookies from "js-cookie";
 import { redirect } from 'next/navigation';
+import EventList from "../components/EventList";
 
 const EventsViewPage = () => {
   const options = []
@@ -18,6 +19,7 @@ const EventsViewPage = () => {
   return (
     <div className="landing-section">
       <Navbar options={options}/>
+      <EventList />
     </div>
   );
 };

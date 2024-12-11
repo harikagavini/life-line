@@ -82,4 +82,12 @@ public class Events {
     public void setZip(String zip) {
         this.zip = zip;
     }
+
+    public Long getEventId() {
+        return eventId;
+    }
+
+    public void setEventId(Long eventId) {
+        this.eventId = eventId;
+    }
 }

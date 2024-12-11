@@ -3,7 +3,7 @@
 import React from "react";
 
 const EventCard = ({ event, onEdit, onDelete, isEditable }) => {
-  const { name, eventDate, street, city, state, zip } = event;
+  const { name, eventDate, street, city, state, zip, branchId, eventId } = event;
 
   return (
     <div className="card">
@@ -22,7 +22,7 @@ const EventCard = ({ event, onEdit, onDelete, isEditable }) => {
             </button>
           )}
           {isEditable && (
-            <button className="btn-delete" onClick={() => onDelete(event.id)}>
+            <button className="btn-delete" onClick={() => onDelete(eventId)}>
               Delete
             </button>
           )}

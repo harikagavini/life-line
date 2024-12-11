@@ -73,7 +73,7 @@ const EventCreationForm = () => {
   
   useEffect(() => {
     if (submissionComplete) {
-      redirect('/lifeline/events');
+      redirect('/events');
     }
   }, [submissionComplete]);
 
@@ -133,6 +133,7 @@ const EventCreationForm = () => {
               type="text"
               value={street}
               onChange={(event) => setStreet(event.target.value)}
+              required
             />
           </div>
         </div>
@@ -147,6 +148,7 @@ const EventCreationForm = () => {
               type="text"
               value={city}
               onChange={(event) => setCity(event.target.value)}
+              required
             />
           </div>
           <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
@@ -159,6 +161,7 @@ const EventCreationForm = () => {
               type="text"
               value={state}
               onChange={(event) => setState(event.target.value)}
+              required
             />
           </div>
         </div>
@@ -173,6 +176,7 @@ const EventCreationForm = () => {
               type="text"
               value={zip}
               onChange={(event) => setZip(event.target.value)}
+              required
             />
           </div>
         </div>
