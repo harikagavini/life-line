@@ -9,25 +9,26 @@ public class HospitalLocation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long hospId;
-
+    private Long id;
+    @Column(name = "HospitalId", nullable = false, unique = true)
+    private String hospitalId;
+    @Column(name = "Name", nullable = false)
     private String name;
+    @Column(name = "Email", nullable = false)
     private String email;
-    private String phoneNum;
+    @Column(name="PhoneNum", nullable = false)
+    private String phone_num;
+    @Column(name = "Street", nullable = false)
     private String street;
+    @Column(name = "City", nullable = false)
     private String city;
+    @Column(name = "State", nullable = false)
     private String state;
+    @Column(name = "ZipCode", nullable = false)
     private String zip;
+    @Transient
+    private String password;
 
-
-
-    public Long getHospId() {
-        return hospId;
-    }
-
-    public void setHospId(Long hospId) {
-        this.hospId = hospId;
-    }
 
     public String getName() {
         return name;
@@ -45,12 +46,12 @@ public class HospitalLocation {
         this.email = email;
     }
 
-    public String getPhoneNum() {
-        return phoneNum;
+    public String getPhone_num() {
+        return phone_num;
     }
 
-    public void setPhoneNum(String phoneNum) {
-        this.phoneNum = phoneNum;
+    public void setPhone_num(String phone_num) {
+        this.phone_num = phone_num;
     }
 
     public String getStreet() {
@@ -83,5 +84,29 @@ public class HospitalLocation {
 
     public void setZip(String zip) {
         this.zip = zip;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getHospitalId() {
+        return hospitalId;
+    }
+
+    public void setHospitalId(String hospitalId) {
+        this.hospitalId = hospitalId;
     }
 }

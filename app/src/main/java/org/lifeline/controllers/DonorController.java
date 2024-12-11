@@ -15,9 +15,6 @@ public class DonorController {
     @Autowired
     private DonorService donorService;
 
-    @Autowired
-    private DonorRepository donorRepo;
-
     @PostMapping("/register/donor")
     public RegistrationResponse registerDonor(@RequestBody Donor donor){
         donorService.saveDonor(donor);
