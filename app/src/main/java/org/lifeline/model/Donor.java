@@ -8,27 +8,17 @@ import java.util.Date;
 @Table(name = "Donor")
 public class Donor {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long donorId;
-    @Column(name = "FirstName", nullable = false)
     private String first_name;
-    @Column(name = "LastName", nullable = false)
     private String last_name;
     @Column(name = "BloodType", nullable = false)
     private String blood_type;
-    @Column(name = "EmailId", nullable = false, unique = true)
     private String email;
-    @Column(name = "PhoneNumber", nullable = false)
-    private String phone_num;
-    @Column(name = "DateOfBirth", nullable = false)
+    private String phone_number;
     private Date dob;
-    @Column(name = "Street", nullable = false)
     private String street;
-    @Column(name = "City", nullable = false)
     private String city;
-    @Column(name = "State", nullable = false)
     private String state;
-    @Column(name = "ZipCode", nullable = false)
     private String zip;
     @Column(name = "totalDonated", nullable = true)
     private int totalDonated;
@@ -75,12 +65,12 @@ public class Donor {
         this.email = email;
     }
 
-    public String getPhone_num() {
-        return phone_num;
+    public String getPhone_number() {
+        return phone_number;
     }
 
-    public void setPhone_num(String phone_num) {
-        this.phone_num = phone_num;
+    public void setPhone_number(String phone_number) {
+        this.phone_number = phone_number;
     }
 
     public String getStreet() {

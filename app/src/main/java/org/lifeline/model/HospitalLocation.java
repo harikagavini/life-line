@@ -8,23 +8,13 @@ import jakarta.persistence.*;
 public class HospitalLocation {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long id;
-    @Column(name = "HospitalId", nullable = false, unique = true)
     private String hospitalId;
-    @Column(name = "Name", nullable = false)
     private String name;
-    @Column(name = "Email", nullable = false)
     private String email;
-    @Column(name= "PhoneNum", nullable = false)
     private String phoneNum;
-    @Column(name = "Street", nullable = false)
     private String street;
-    @Column(name = "City", nullable = false)
     private String city;
-    @Column(name = "State", nullable = false)
     private String state;
-    @Column(name = "ZipCode", nullable = false)
     private String zip;
     @Transient
     private String password;
@@ -92,14 +82,6 @@ public class HospitalLocation {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getHospitalId() {

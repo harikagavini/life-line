@@ -7,23 +7,13 @@ import jakarta.persistence.*;
 public class BloodBank {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long id;
-    @Column(name = "BranchId", nullable = false, unique = true)
     private String branchId;
-    @Column(name = "Name", nullable = false)
     private String name;
-    @Column(name = "Email", nullable = false)
     private String email;
-    @Column(name="PhoneNum", nullable = false)
     private String phone_num;
-    @Column(name = "Street", nullable = false)
     private String street;
-    @Column(name = "City", nullable = false)
     private String city;
-    @Column(name = "State", nullable = false)
     private String state;
-    @Column(name = "ZipCode", nullable = false)
     private String zip;
     @Transient
     private String password;
@@ -99,13 +89,5 @@ public class BloodBank {
 
     public void setBranchId(String branchId) {
         this.branchId = branchId;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 }
