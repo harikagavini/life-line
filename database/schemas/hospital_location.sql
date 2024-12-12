@@ -4,9 +4,8 @@ CREATE TABLE hospital_location (
   email varchar(255) NOT NULL,
   name varchar(255) NOT NULL,
   phone_num varchar(255) NOT NULL,
-  state varchar(255) NOT NULL,
-  street varchar(255) NOT NULL,
-  zip_code varchar(255) NOT NULL,
-  PRIMARY KEY (hospital_id),
-  UNIQUE KEY uk_hospital_id (hospital_id)
+  state varchar(255) NULL,
+  street varchar(255) NULL,
+  zip varchar(255) NULL,
+  PRIMARY KEY (hospital_id)
 )

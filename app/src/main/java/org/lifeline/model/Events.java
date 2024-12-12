@@ -9,6 +9,7 @@ import java.util.Date;
 public class Events {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long eventId;
     private String name;
     private Date eventDate;

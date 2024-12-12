@@ -20,7 +20,7 @@ const DonorRegisterForm = () => {
   const [lastName, setLastName] = useState('');
   const [bloodType, setBloodType] = useState(types[0].value);
   const [email, setEmail] = useState('');
-  const [phoneNum, setPhoneNum] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
   const [street, setStreet] = useState('');
   const [city, setCity] = useState('');
   const [state, setState] = useState('');
@@ -76,11 +76,11 @@ const DonorRegisterForm = () => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          first_name: firstName,
-          last_name: lastName,
-          blood_type: bloodType,
+          firstName,
+          lastName,
+          bloodType,
           email,
-          phone_num: phoneNum,
+          phoneNumber,
           street,
           city,
           state,
@@ -114,12 +114,12 @@ const DonorRegisterForm = () => {
       <form onSubmit={handleSubmit}>
         <div className="flex flex-wrap -mx-3 mb-6">
           <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="first_name">
+            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="firstName">
               First Name
             </label>
             <input
               className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              id="first_name"
+              id="firstName"
               type="text"
               value={firstName}
               onChange={(event) => setFirstName(event.target.value)}
@@ -127,12 +127,12 @@ const DonorRegisterForm = () => {
             />
           </div>
           <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="last_name">
+            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="lastName">
               Last Name
             </label>
             <input
               className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              id="last_name"
+              id="lastName"
               type="text"
               value={lastName}
               onChange={(event) => setLastName(event.target.value)}
@@ -175,15 +175,15 @@ const DonorRegisterForm = () => {
         </div>
         <div className="flex flex-wrap -mx-3 mb-6">
           <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="phone_num">
+            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="phoneNumber">
               Phone Number
             </label>
             <input
               className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              id="phone_num"
+              id="phoneNumber"
               type="text"
-              value={phoneNum}
-              onChange={(event) => setPhoneNum(event.target.value)}
+              value={phoneNumber}
+              onChange={(event) => setPhoneNumber(event.target.value)}
             />
           </div>
           <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">

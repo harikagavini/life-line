@@ -1,4 +1,4 @@
-CREATE TABLE SERVICES (
+CREATE TABLE services (
   service_id int NOT NULL,
   name VARCHAR(255) NOT NULL,
   hospital_id varchar(255) NOT NULL,

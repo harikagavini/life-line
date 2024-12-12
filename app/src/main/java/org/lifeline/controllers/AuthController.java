@@ -28,20 +28,22 @@ public class AuthController {
                     true,
                     token,
                     authRequest.getBranchId(),
-                    authRequest.getHospitalId()
+                    authRequest.getHospitalId(),
+                    authRequest.getDonorId()
             );
         } else {
-            return getLoginResponse("Login Failed", false, null, null, null);
+            return getLoginResponse("Login Failed", false, null, null, null, null);
         }
     }
 
-    private LoginResponse getLoginResponse(String msg, Boolean success, String token, String branchId, String hospitalId) {
+    private LoginResponse getLoginResponse(String msg, Boolean success, String token, String branchId, String hospitalId, Long donorId) {
         LoginResponse loginResponse = new LoginResponse();
         loginResponse.setMessage(msg);
         loginResponse.setSuccess(success);
         if(token != null) loginResponse.setToken(token);
         if(branchId != null) loginResponse.setBranchId(branchId);
         if(hospitalId != null) loginResponse.setHospitalId(hospitalId);
+        if(donorId != null) loginResponse.setDonorId(donorId);
 
         return loginResponse;
     }

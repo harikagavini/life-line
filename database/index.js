@@ -10,7 +10,7 @@ const dbConfig = {
 };
 
 const schemasExecutionOrder = [
-  './schemas/authreq.sql',
+  './schemas/auth.sql',
   './schemas/donor.sql',
   './schemas/hospital_location.sql',
   './schemas/blood_bank.sql',

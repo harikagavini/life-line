@@ -4,18 +4,18 @@ import jakarta.persistence.*;
 import org.lifeline.enums.RegistrationType;
 
 @Entity
-@Table(name="Auth")
+@Table(name="auth")
 public class AuthRequest {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String email;
     private String password;
     @Enumerated(EnumType.STRING)
     private RegistrationType registrationType;
-    @Column(name="branch_id", nullable = true)
     private String branchId;
-    @Column(name="hospital_id", nullable = true)
     private String hospitalId;
+    private Long donorId;
 
     public String getEmail() {
         return email;
@@ -63,5 +63,13 @@ public class AuthRequest {
 
     public void setHospitalId(String hospitalId) {
         this.hospitalId = hospitalId;
+    }
+
+    public Long getDonorId() {
+        return donorId;
+    }
+
+    public void setDonorId(Long donorId) {
+        this.donorId = donorId;
     }
 }

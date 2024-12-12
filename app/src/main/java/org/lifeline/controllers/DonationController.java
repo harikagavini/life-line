@@ -21,21 +21,4 @@ public class DonationController {
         Donation createdDonation = donationService.createDonation(donation);
         return new ResponseEntity<>(createdDonation, HttpStatus.CREATED);
     }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<Donation> updateDonation(@PathVariable Long id, @RequestBody Donation donation) {
-        Donation updatedDonation = donationService.updateDonation(id, donation);
-        return new ResponseEntity<>(updatedDonation, HttpStatus.OK);
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteDonation(@PathVariable Long id) {
-        donationService.deleteDonation(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
-
-    @GetMapping
-    public List<Donation> getAllDonations() {
-        return donationService.getAllDonations();  // This can be implemented in the service layer
-    }
 }

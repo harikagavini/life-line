@@ -36,6 +36,7 @@ public class DonorServiceImpl implements DonorService {
         authRequest.setEmail(donor.getEmail());
         authRequest.setPassword(donor.getPassword());
         authRequest.setRegistrationType(RegistrationType.DONOR);
+        authRequest.setDonorId(savedModel.getDonorId());
         authRepository.save(authRequest);
 
         return savedModel;
