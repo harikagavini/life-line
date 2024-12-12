@@ -26,8 +26,8 @@ const schemasExecutionOrder = [
 const triggers = [
   './triggers/donation_storage_trigger.sql',
   './triggers/donation_reward_trigger.sql',
-
-
+  './triggers/order_storage_trigger.sql',
+  './triggers/reward_service_trigger.sql',
 ];
 
 async function executeQueries(files) {
