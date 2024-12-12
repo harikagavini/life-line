@@ -14,14 +14,17 @@ public class AuthServiceImpl implements AuthService {
     @Autowired
     private JwtTokenGenerator jwtTokenGenerator;
 
-    public String validateLogin(AuthRequest authReq) {
+    public AuthRequest validateLogin(AuthRequest authReq) {
         AuthRequest authRequest = authRepository.findByEmail(authReq.getEmail());
         if (authRequest != null &&
             authRequest.getPassword().equals(authReq.getPassword()) &&
             authRequest.getRegistrationType().equals(authReq.getRegistrationType())
         ) {
-            return jwtTokenGenerator.generateToken(authReq);
+            return authRequest;
         }
         return null;
+    }
+    public String generateToken(AuthRequest authRequest) {
+        return jwtTokenGenerator.generateToken(authRequest);
     }
 }

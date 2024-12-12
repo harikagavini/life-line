@@ -12,6 +12,10 @@ public class AuthRequest {
     private String password;
     @Enumerated(EnumType.STRING)
     private RegistrationType registrationType;
+    @Column(name="branch_id", nullable = true)
+    private String branchId;
+    @Column(name="hospital_id", nullable = true)
+    private String hospitalId;
 
     public String getEmail() {
         return email;
@@ -43,5 +47,21 @@ public class AuthRequest {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getBranchId() {
+        return branchId;
+    }
+
+    public void setBranchId(String branchId) {
+        this.branchId = branchId;
+    }
+
+    public String getHospitalId() {
+        return hospitalId;
+    }
+
+    public void setHospitalId(String hospitalId) {
+        this.hospitalId = hospitalId;
     }
 }

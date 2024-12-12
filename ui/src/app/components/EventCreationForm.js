@@ -6,7 +6,7 @@ import configuration from '@/app/config';
 import Cookies from 'js-cookie';
 
 const EventCreationForm = () => {
-  const [branchId, setBranchId] = useState('');
+  const [branchId, setBranchId] = useState(Cookies.get('branchId'));
   const [name, setName] = useState('');
   const [eventDate, setEventDate] = useState('');
   const [street, setStreet] = useState('');
@@ -19,6 +19,12 @@ const EventCreationForm = () => {
   const validateEventDate = (inputDate) => {
     const today = new Date();
     const enteredDate = new Date(inputDate);
+    
+    const timezoneOffset = enteredDate.getTimezoneOffset() * 60 * 1000;
+    enteredDate.setTime(enteredDate.getTime() + timezoneOffset);
+
+    today.setHours(0, 0, 0, 0);
+    enteredDate.setHours(0, 0, 0, 0);
   
     // Check if the entered date is valid
     if (isNaN(enteredDate)) {
@@ -92,6 +98,7 @@ const EventCreationForm = () => {
               type="text"
               value={branchId}
               onChange={(event) => setBranchId(event.target.value)}
+              readOnly
               required
             />
           </div>

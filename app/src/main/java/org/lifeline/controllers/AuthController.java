@@ -19,19 +19,30 @@ public class AuthController {
 
     @PostMapping("/login")
     public LoginResponse loginUser(@RequestBody AuthRequest authReq, HttpServletResponse response) {
-        String token = authService.validateLogin(authReq);
-        if (token != null) {
-            return getLoginResponse("Login Success", true, token);
+        AuthRequest authRequest = authService.validateLogin(authReq);
+
+        if (authRequest != null) {
+            String token = authService.generateToken(authRequest);
+            return getLoginResponse(
+                    "Login Success",
+                    true,
+                    token,
+                    authRequest.getBranchId(),
+                    authRequest.getHospitalId()
+            );
         } else {
-            return getLoginResponse("Login Failed", false, null);
+            return getLoginResponse("Login Failed", false, null, null, null);
         }
     }
 
-    private LoginResponse getLoginResponse(String msg, Boolean success, String token) {
+    private LoginResponse getLoginResponse(String msg, Boolean success, String token, String branchId, String hospitalId) {
         LoginResponse loginResponse = new LoginResponse();
         loginResponse.setMessage(msg);
         loginResponse.setSuccess(success);
         if(token != null) loginResponse.setToken(token);
+        if(branchId != null) loginResponse.setBranchId(branchId);
+        if(hospitalId != null) loginResponse.setHospitalId(hospitalId);
+
         return loginResponse;
     }
 }
