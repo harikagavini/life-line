@@ -37,6 +37,7 @@ const LoginForm = () => {
         Cookies.set('type', registrationType);
         if(data.branchId) Cookies.set('branchId', data.branchId);
         if(data.hospitalId) Cookies.set('hospitalId', data.hospitalId);
+        if(data.donorId) Cookies.set('donorId', data.donorId);
       } else {
         setError(data.message);
       }

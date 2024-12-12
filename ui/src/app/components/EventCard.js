@@ -4,21 +4,24 @@ import React from "react";
 import { useState, useEffect } from "react";
 import Modal from "./Modal";
 import dateStringOffSetCorrection from "@/app/utils/dateOffSetCorrection";
+import configuration from "@/app/config";
+import Cookies from "js-cookie";
 
 const types = [
-  { value: 'A+', label: 'A+' },
-  { value: 'A-', label: 'A-' },
-  { value: 'B+', label: 'B+' },
-  { value: 'B-', label: 'B-' },
-  { value: 'AB+', label: 'AB+' },
-  { value: 'AB-', label: 'AB-' },
-  { value: 'O+', label: 'O-' },
-  { value: 'O-', label: 'O-' },
+  { value: 'A_POSITIVE', label: 'A+' },
+  { value: 'A_NEGATIVE', label: 'A-' },
+  { value: 'B_POSITIVE', label: 'B+' },
+  { value: 'B_NEGATIVE', label: 'B-' },
+  { value: 'AB_POSITIVE', label: 'AB+' },
+  { value: 'AB_NEGATIVE', label: 'AB-' },
+  { value: 'O_POSITIVE', label: 'O-' },
+  { value: 'O_NEGATIVE', label: 'O-' },
 ];
 
-const EventCard = ({ event, onEdit, onDelete, onDonation, isEditable, isOngoing }) => {
+const EventCard = ({ event, onEdit, onDelete, isEditable, isOngoing }) => {
   const { name, eventDate, street, city, state, zip, branchId, eventId } = event;
   const [isModalOpen, setModalOpen] = useState(false);
+  const [error, setError] = useState(false);
 
   const handleEditClick = () => {
     setModalOpen(true);
@@ -26,6 +29,7 @@ const EventCard = ({ event, onEdit, onDelete, onDonation, isEditable, isOngoing 
 
   const handleCloseModal = () => {
     setModalOpen(false);
+    setError("");
   };
   
   const handleSubmit = async (updatedEvent) => {
@@ -36,9 +40,22 @@ const EventCard = ({ event, onEdit, onDelete, onDonation, isEditable, isOngoing 
   };
 
   const handleDonation = async (donationDetails) => {
-    const success = await onDonation(donationDetails);
-    if (success) {
-      handleCloseModal();
+    try {
+      const response = await fetch(`${configuration.BACKEND_URL}/lifeline/donation`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${Cookies.get('token')}`
+        },
+        body: JSON.stringify(donationDetails),
+      });
+      if (response.ok) {
+        handleCloseModal();
+      } else {
+        setError(response.message);
+      }
+    } catch (error) {
+      setError('Donation details submission failed');
     }
   };
 
@@ -251,6 +268,7 @@ const EventCard = ({ event, onEdit, onDelete, onDonation, isEditable, isOngoing 
                 ))}  
               </select>
             </div>
+            {error && <p className="text-red-500">{error}</p>}
             <div className="text-right">
               <button
                 type="submit"

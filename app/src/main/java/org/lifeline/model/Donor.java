@@ -2,7 +2,6 @@ package org.lifeline.model;
 
 import jakarta.persistence.*;
 import org.lifeline.enums.BloodType;
-import org.lifeline.enums.BloodTypeConverter;
 
 import java.util.Date;
 
@@ -14,7 +13,7 @@ public class Donor {
     private Long donorId;
     private String firstName;
     private String lastName;
-    @Convert(converter = BloodTypeConverter.class)
+    @Enumerated(EnumType.STRING)
     private BloodType bloodType;
     private String email;
     private String phoneNumber;

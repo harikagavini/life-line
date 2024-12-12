@@ -98,37 +98,16 @@ const EventList = () => {
     }
   };
 
-  const handleDonation = async (donationDetails) => {
-    try {
-      const response = await fetch(`${configuration.BACKEND_URL}/lifeline/donation`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${Cookies.get('token')}`
-        },
-        body: JSON.stringify(donationDetails),
-      });
-      if (response.ok) {
-        return true;
-      } else {
-        setError(data.message);
-      }
-    } catch (error) {
-      setError('Donation details submission failed');
-    }
-  };
-
   return (
     <div className="event-list">
       {events.sort(compareDate).map((event, index) => (
         <EventCard
           key={index}
           event={event}
-          isEditable={compareWithToday(event) > 0 && Cookies.get('type') === 'BLOOD_BANK' && Cookies.get('branchId') === event.branchId } // Set based on user role or permissions
-          isOngoing={compareWithToday(event) == 0}
+          isEditable={compareWithToday(event) > 0 && Cookies.get('type') === 'BLOOD_BANK' && Cookies.get('branchId') === event.branchId }
+          isOngoing={compareWithToday(event) == 0 && Cookies.get('type') === 'BLOOD_BANK' && Cookies.get('branchId') === event.branchId }
           onEdit={handleEdit}
           onDelete={handleDelete}
-          onDonation={handleDonation}
         />
       ))}
     </div>
