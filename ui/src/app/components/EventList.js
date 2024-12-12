@@ -100,6 +100,7 @@ const EventList = () => {
 
   const handleDonation = async (donationDetails) => {
     console.log('I am not yet handling donation');
+    return true
   };
 
   return (

@@ -5,6 +5,17 @@ import { useState, useEffect } from "react";
 import Modal from "./Modal";
 import dateStringOffSetCorrection from "@/app/utils/dateOffSetCorrection";
 
+const types = [
+  { value: 'A+', label: 'A+' },
+  { value: 'A-', label: 'A-' },
+  { value: 'B+', label: 'B+' },
+  { value: 'B-', label: 'B-' },
+  { value: 'AB+', label: 'AB+' },
+  { value: 'AB-', label: 'AB-' },
+  { value: 'O+', label: 'O-' },
+  { value: 'O-', label: 'O-' },
+];
+
 const EventCard = ({ event, onEdit, onDelete, onDonation, isEditable, isOngoing }) => {
   const { name, eventDate, street, city, state, zip, branchId, eventId } = event;
   const [isModalOpen, setModalOpen] = useState(false);
@@ -102,7 +113,7 @@ const EventCard = ({ event, onEdit, onDelete, onDonation, isEditable, isOngoing 
               <input
                 type="date"
                 name="eventDate"
-                defaultValue={dateStringOffSetCorrection(eventDate)}
+                defaultValue={dateStringOffSetCorrection(eventDate).toISOString().slice(0, 10)}
                 required
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
               />
@@ -161,80 +172,84 @@ const EventCard = ({ event, onEdit, onDelete, onDonation, isEditable, isOngoing 
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              const updatedEvent = {
-                ...event,
-                name: e.target.name.value,
-                eventDate: e.target.eventDate.value,
-                street: e.target.street.value,
-                city: e.target.city.value,
-                state: e.target.state.value,
-                zip: e.target.zip.value,
+              const donationDetails = {
+                eventId: e.target.eventId.value,
+                donationDate: e.target.donationDate.value,
+                branchId: e.target.branchId.value,
+                donorId: e.target.donorId.value,
+                quantity: e.target.quantity.value,
+                bloodType: e.target.bloodType.value,
               };
-              handleSubmit(updatedEvent);
+              handleDonation(donationDetails);
             }}
             className="space-y-6 bg-white p-6 rounded-lg shadow-md w-full max-w-md mx-auto"
           >
             <h3 className="text-lg font-semibold text-gray-800">Edit Event</h3>
             <div>
-              <label className="block text-sm font-medium text-gray-700">Name</label>
+              <label className="block text-sm font-medium text-gray-700">Event Id</label>
               <input
                 type="text"
-                name="name"
-                defaultValue={name}
+                name="eventId"
+                defaultValue={eventId}
                 required
                 readOnly
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700">Date</label>
+              <label className="block text-sm font-medium text-gray-700">Donation Date</label>
               <input
                 type="date"
-                name="eventDate"
-                defaultValue={dateStringOffSetCorrection(eventDate)}
+                name="donationDate"
+                defaultValue={dateStringOffSetCorrection(eventDate).toISOString().slice(0, 10)}
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                readOnly
+                required
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Blood Bank Id</label>
+              <input
+                type="text"
+                name="branchId"
+                defaultValue={branchId}
+                required
+                readOnly
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Donor Id</label>
+              <input
+                type="number"
+                name="donorId"
                 required
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700">Street</label>
+              <label className="block text-sm font-medium text-gray-700">Quantity</label>
               <input
-                type="text"
-                name="street"
-                defaultValue={street}
+                type="number"
+                name="quantity"
                 required
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700">City</label>
-              <input
-                type="text"
-                name="city"
-                defaultValue={city}
+              <label className="block text-sm font-medium text-gray-700">Blood Type</label>
+              <select
+                name="bloodType"
+                defaultValue={types[0].value}
                 required
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700">State</label>
-              <input
-                type="text"
-                name="state"
-                defaultValue={state}
-                required
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700">Zip</label>
-              <input
-                type="text"
-                name="zip"
-                defaultValue={zip}
-                required
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-              />
+              >
+                {types.map((type) => (
+                  <option key={type.value} value={type.value}>
+                    {type.label}
+                  </option>
+                ))}  
+              </select>
             </div>
             <div className="text-right">
               <button
