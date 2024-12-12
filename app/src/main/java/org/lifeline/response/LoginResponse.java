@@ -10,6 +10,7 @@ public class LoginResponse {
     private String type;
     private String branchId;
     private String hospitalId;
+    private Long donorId;
 
     public LoginResponse() {
     }
@@ -60,6 +61,14 @@ public class LoginResponse {
 
     public void setHospitalId(String hospitalId) {
         this.hospitalId = hospitalId;
+    }
+
+    public Long getDonorId() {
+        return donorId;
+    }
+
+    public void setDonorId(Long donorId) {
+        this.donorId = donorId;
     }
 }
 

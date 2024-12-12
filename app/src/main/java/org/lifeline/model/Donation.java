@@ -1,6 +1,7 @@
 package org.lifeline.model;
 
 import jakarta.persistence.*;
+import org.lifeline.enums.BloodTypeConverter;
 
 import java.util.Date;
 
@@ -10,15 +11,13 @@ public class Donation {
 
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long donationId;
     private Long eventId;
     private int quantity;
+    @Convert(converter = BloodTypeConverter.class)
     private String bloodType;
     private Date donationDate;
-
-    @ManyToOne
-    @JoinColumn(name = "donorId")
-    private Reward reward;
 
     public Long getEventId() {
         return eventId;
@@ -50,14 +49,6 @@ public class Donation {
 
     public void setDonationDate(Date donationDate) {
         this.donationDate = donationDate;
-    }
-
-    public Reward getReward() {
-        return reward;
-    }
-
-    public void setReward(Reward reward) {
-        this.reward = reward;
     }
 
     public Long getDonationId() {

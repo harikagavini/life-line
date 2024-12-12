@@ -1,9 +1,9 @@
 CREATE TABLE events (
-  event_id int NOT NULL,
+  event_id int NOT NULL AUTO_INCREMENT,
   branch_id varchar(255) NOT NULL,
   city varchar(255) NOT NULL,
   event_date date NOT NULL,
-  event_name varchar(255) NOT NULL,
+  name varchar(255) NOT NULL,
   state varchar(255) NOT NULL,
   street varchar(255) NOT NULL,
   zip varchar(255) NOT NULL,

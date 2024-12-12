@@ -1,7 +1,6 @@
 package org.lifeline.model;
 
 import jakarta.persistence.*;
-import jdk.jshell.Snippet;
 import org.lifeline.enums.BloodType;
 import org.lifeline.enums.StatusType;
 
@@ -11,6 +10,7 @@ import java.util.Date;
 @Table(name = "Orders")
 public class Order {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long orderId;
     private String hospId;
     private String branchId;
