@@ -2,17 +2,35 @@
 
 import { useState, useEffect } from "react";
 import configuration from "@/app/config";
+import Cookies from "js-cookie";
 
 export default function BloodStorage() {
   const [storage, setStorage] = useState([]);
   const [sortOrder, setSortOrder] = useState("asc");
 
   useEffect(() => {
-    // Fetch storage data
-    fetch(`${configuration.BACKEND_URL}/lifeline/storage`)
-      .then((res) => res.json())
-      .then((data) => setStorage(data));
+    const fetchStorage = async () => {
+      try {
+        const response = await fetch(
+          `${configuration.BACKEND_URL}/lifeline/storage`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${Cookies.get('token')}`,
+            },
+          }
+        );
+        const data = await response.json();
+        setStorage(data);
+      } catch (error) {
+        console.error("Failed to fetch storage data", error);
+      }
+    };
+
+    fetchStorage();
   }, []);
+
 
   const sortTable = (key) => {
     const sortedData = [...storage].sort((a, b) => {
@@ -34,9 +52,9 @@ export default function BloodStorage() {
           <tr className="bg-gray-100">
             <th
               className="cursor-pointer p-2"
-              onClick={() => sortTable("branch")}
+              onClick={() => sortTable("branchId")}
             >
-              Branch
+              Branch Id
             </th>
             <th
               className="cursor-pointer p-2"
@@ -55,7 +73,7 @@ export default function BloodStorage() {
         <tbody>
           {storage.map((row, index) => (
             <tr key={index} className="border-b hover:bg-gray-50">
-              <td className="p-2">{row.branch}</td>
+              <td className="p-2">{row.branchId}</td>
               <td className="p-2">{row.bloodType}</td>
               <td className="p-2">{row.quantity}</td>
             </tr>

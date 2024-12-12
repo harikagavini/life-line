@@ -6,6 +6,10 @@ import org.lifeline.enums.BloodType;
 @Entity
 @Table(name = "Storage")
 public class Storage {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long Id;
+
     private String branchId;
     private int quantity;
     @Enumerated(EnumType.STRING)
@@ -33,5 +37,13 @@ public class Storage {
 
     public void setBloodType(BloodType bloodType) {
         this.bloodType = bloodType;
+    }
+
+    public Long getId() {
+        return Id;
+    }
+
+    public void setId(Long id) {
+        Id = id;
     }
 }

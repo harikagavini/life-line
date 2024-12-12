@@ -52,7 +52,7 @@ const EventCard = ({ event, onEdit, onDelete, isEditable, isOngoing }) => {
       if (response.ok) {
         handleCloseModal();
       } else {
-        setError(response.message);
+        setError(`Unable to submit donation details: ${response.message}`);
       }
     } catch (error) {
       setError('Donation details submission failed');

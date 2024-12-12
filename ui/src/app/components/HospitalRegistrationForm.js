@@ -32,7 +32,7 @@ const HospitalRegistrationForm = () => {
           hospitalId,
           name,
           email,
-          phone_num: phoneNum,
+          phoneNum,
           street,
           city,
           state,

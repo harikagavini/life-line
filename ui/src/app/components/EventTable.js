@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { redirect } from 'next/navigation';
 import configuration from '@/app/config';
+import dateStringOffSetCorrection from '../utils/dateOffSetCorrection';
 
 export default function EventsTable() {
   const [events, setEvents] = useState([]);
@@ -33,7 +34,7 @@ export default function EventsTable() {
               onClick={() => redirect("/events")}
             >
               <td className="p-2">{event.name}</td>
-              <td className="p-2">{event.date}</td>
+              <td className="p-2">{dateStringOffSetCorrection(event.eventDate).toISOString().slice(0, 10)}</td>
               <td className="p-2">{event.city}</td>
             </tr>
           ))}

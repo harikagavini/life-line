@@ -9,8 +9,11 @@ import EventList from "../components/EventList";
 const EventsViewPage = () => {
   const options = []
   options.push({ href: '/feed', label: 'Feed' })
-  if(Cookies.get('type') === 'BLOOD_BANK') {
+  if (Cookies.get('type') === 'BLOOD_BANK') {
     options.push({ href: '/events/create', label: 'Create Event' })
+  }
+  if(Cookies.get('type') === 'BLOOD_BANK' || Cookies.get('type') === 'HOSPITAL') {
+    options.push({ href: '/orders', label: 'View orders' })
   } 
   options.push({ href: '/signout', label: 'SignOut' });
   if(!isLoggedIn(Cookies.get('token'))) {

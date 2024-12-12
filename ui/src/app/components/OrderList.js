@@ -21,7 +21,8 @@ const OrderList = () => {
         }
       );
       const data = await response.json();
-      setOrders(data);
+      const newData = data.filter((entry) => entry.hospitalId == Cookies.get('hospitalId') || entry.branchId == Cookies.get('branchId'))
+      setOrders(newData);
     } catch (error) {
       console.error("Failed to fetch orders", error);
     }
@@ -34,13 +35,17 @@ const OrderList = () => {
   const handleApprove = async (orderId) => {
     try {
       const response = await fetch(
-        `${configuration.BACKEND_URL}/lifeline/orders/${orderId}/approve`,
+        `${configuration.BACKEND_URL}/lifeline/orders`,
         {
-          method: "POST",
+          method: "PUT",
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${Cookies.get("token")}`,
           },
+          body: JSON.stringify({
+            orderId,
+            status: true
+          })
         }
       );
       if (response.ok) {
@@ -60,13 +65,17 @@ const OrderList = () => {
   const handleDeny = async (orderId) => {
     try {
       const response = await fetch(
-        `${configuration.BACKEND_URL}/lifeline/orders/${orderId}/deny`,
+        `${configuration.BACKEND_URL}/lifeline/orders`,
         {
-          method: "POST",
+          method: "PUT",
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${Cookies.get("token")}`,
           },
+          body: JSON.stringify({
+            orderId,
+            status: false,
+          })
         }
       );
       if (response.ok) {
@@ -85,7 +94,7 @@ const OrderList = () => {
 
   return (
     <div className="order-list">
-      {orders.map((order, index) => (
+      {orders && orders.map((order, index) => (
         <OrderCard
           key={index}
           order={order}

@@ -11,13 +11,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/lifeline/orders")
+@RequestMapping("/lifeline")
 public class OrderController {
 
     @Autowired
     private OrderService orderService;
 
-    @PostMapping("/create")
+    @PostMapping("/orders/create")
     public OrderResponse createOrder(@RequestBody Order order){
         orderService.saveOrder(order);
 
@@ -27,16 +27,15 @@ public class OrderController {
         return orderResponse;
     }
 
-    @GetMapping
+    @GetMapping("/orders")
     public ResponseEntity<List<Order>> getAllOrders() {
         List<Order> orders = orderService.getAllOrders();
         return ResponseEntity.ok(orders);
     }
 
-    @PutMapping("/{order_id}")
+    @PutMapping("/orders")
     public OrderResponse updateOrder(@RequestBody OrderDTO orderDTO) {
         orderService.updateOrder(orderDTO);
-
         OrderResponse orderResponse = new OrderResponse();
         orderResponse.setMessage("Order Updated");
         orderResponse.setSuccess(true);

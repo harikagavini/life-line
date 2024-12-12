@@ -8,10 +8,26 @@ export default function DonorLeaderBoard() {
   const [leaders, setLeaders] = useState([]);
 
   useEffect(() => {
-    // Fetch leader board data
-    fetch(`${configuration.BACKEND_URL}/lifeline/reward`)
-      .then((res) => res.json())
-      .then((data) => setLeaders(data));
+    const fetchLeaders = async () => {
+      try {
+        const response = await fetch(
+          `${configuration.BACKEND_URL}/lifeline/reward`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${Cookies.get('token')}`,
+            },
+          }
+        );
+        const data = await response.json();
+        setLeaders(data);
+      } catch (error) {
+        console.error("Failed to fetch storage data", error);
+      }
+    };
+
+    fetchLeaders();
   }, []);
 
   return (
@@ -20,15 +36,15 @@ export default function DonorLeaderBoard() {
       <table className="table-auto w-full text-left">
         <thead>
           <tr className="bg-gray-100">
-            <th className="p-2">Name</th>
+            <th className="p-2">Donor Id</th>
             <th className="p-2">Lifetime Donations</th>
           </tr>
         </thead>
         <tbody>
           {leaders.map((leader, index) => (
             <tr key={index} className="border-b hover:bg-gray-50">
-              <td className="p-2">{leader.name}</td>
-              <td className="p-2">{leader.donations}</td>
+              <td className="p-2">{leader.donorId}</td>
+              <td className="p-2">{leader.totalPoints}</td>
             </tr>
           ))}
         </tbody>

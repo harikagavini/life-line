@@ -5,6 +5,8 @@ import org.lifeline.repository.RewardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class RewardServiceImpl implements RewardService{
 
@@ -14,5 +16,9 @@ public class RewardServiceImpl implements RewardService{
     public Reward getRewardById(Long donorId) {
         return rewardRepository.findById(donorId)
                 .orElseThrow(() -> new IllegalArgumentException("Reward points not found for donor"));
+    }
+
+    public List<Reward> getAllRewards() {
+        return rewardRepository.findAll();
     }
 }

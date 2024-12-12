@@ -2,8 +2,19 @@
 
 import React from "react";
 
+const types = {
+  A_POSITIVE: "A+",
+  A_NEGATIVE: "A-",
+  B_POSITIVE: "B+",
+  B_NEGATIVE: "B-",
+  AB_POSITIVE: "AB+",
+  AB_NEGATIVE: "AB-",
+  O_POSITIVE: "O-",
+  O_NEGATIVE: "O-",
+};
+
 const OrderCard = ({ order, onApprove, onDeny, isActionable }) => {
-  const { orderId, branchId, hospitalId, bloodGroup, quantity, status } = order;
+  const { orderId, branchId, hospitalId, bloodType, quantity, status } = order;
 
   return (
     <div className="card">
@@ -11,7 +22,7 @@ const OrderCard = ({ order, onApprove, onDeny, isActionable }) => {
         <h3 className="card-title">Order ID: {orderId}</h3>
         <p className="card-info">Branch ID: {branchId}</p>
         <p className="card-info">Hospital ID: {hospitalId}</p>
-        <p className="card-info">Blood Group: {bloodGroup}</p>
+        <p className="card-info">Blood Type: {types[bloodType]}</p>
         <p className="card-info">Quantity: {quantity}</p>
         <p className="card-info">Status: {status}</p>
         {isActionable && (

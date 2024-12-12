@@ -4,6 +4,9 @@ import Head from 'next/head';
 import Navbar from '@/app/components/NavBar';
 import isLoggedIn from '@/app/utils/isLoggedIn';
 import Cookies from 'js-cookie';
+import BloodStorage from '../components/BloodStorage';
+import DonorLeaderBoard from '../components/DonorLeaderBoard';
+import EventsTable from '../components/EventTable';
 import { redirect } from 'next/navigation';
 
 export default function Feed() {

@@ -12,7 +12,7 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long orderId;
-    private String hospId;
+    private String hospitalId;
     private String branchId;
 
     @Enumerated(EnumType.STRING)
@@ -26,12 +26,12 @@ public class Order {
     private Date orderCreated;
     private Date orderCompleted;
 
-    public String getHospId() {
-        return hospId;
+    public String getHospitalId() {
+        return hospitalId;
     }
 
-    public void setHospId(String hospId) {
-        this.hospId = hospId;
+    public void setHospitalId(String hospitalId) {
+        this.hospitalId = hospitalId;
     }
 
     public String getBranchId() {

@@ -1,0 +1,7 @@
+INSERT INTO orders (blood_type, branch_id, hospital_id, order_completed, order_created, quantity, status)
+VALUES
+('A_POSITIVE', 'BB001', 'H001', NULL, CURDATE(), 5, 'PENDING'),
+('O_NEGATIVE', 'BB002', 'H002', CURDATE(), CURDATE() - INTERVAL 1 DAY, 3, 'COMPLETED'),
+('B_POSITIVE', 'BB003', 'H003', CURDATE() - INTERVAL 2 DAY, CURDATE() - INTERVAL 3 DAY, 7, 'PENDING'),
+('AB_NEGATIVE', 'BB004', 'H004', NULL, CURDATE() - INTERVAL 5 DAY, 4, 'PENDING'),
+('O_POSITIVE', 'BB005', 'H005', CURDATE(), CURDATE() - INTERVAL 1 DAY, 6, 'COMPLETED');

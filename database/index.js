@@ -30,6 +30,17 @@ const triggers = [
   './triggers/reward_service_trigger.sql',
 ];
 
+const dataOrder = [
+  './data/donor.sql',
+  './data/hospital_location.sql',
+  './data/bloodbank.sql',
+  './data/events.sql',
+  './data/orders.sql',
+  './data/services.sql',
+  './data/donation.sql',
+  './data/auth.sql',
+]
+
 async function executeQueries(files) {
   for (const file of files) {
     const fileContent = await fs.promises.readFile(file, 'utf8');
@@ -47,6 +58,7 @@ async function main() {
     global.dbConnection = await mysql.createConnection(dbConfig);
     await executeQueries(schemasExecutionOrder);
     await executeQueries(triggers);
+    await executeQueries(dataOrder);
     await dbConnection.end();
   } catch (error) {
     console.error(`Error while executing queries: ${error.message}`);
