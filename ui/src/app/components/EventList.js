@@ -99,8 +99,23 @@ const EventList = () => {
   };
 
   const handleDonation = async (donationDetails) => {
-    console.log('I am not yet handling donation');
-    return true
+    try {
+      const response = await fetch(`${configuration.BACKEND_URL}/lifeline/donation`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${Cookies.get('token')}`
+        },
+        body: JSON.stringify(donationDetails),
+      });
+      if (response.ok) {
+        return true;
+      } else {
+        setError(data.message);
+      }
+    } catch (error) {
+      setError('Donation details submission failed');
+    }
   };
 
   return (
