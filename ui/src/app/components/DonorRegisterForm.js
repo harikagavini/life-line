@@ -1,61 +1,65 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
-import { redirect } from 'next/navigation';
-import configuration from '@/app/config';
+import React, { useState, useEffect } from "react";
+import { redirect } from "next/navigation";
+import configuration from "@/app/config";
 
 const types = [
-  { value: 'A_POSITIVE', label: 'A+' },
-  { value: 'A_NEGATIVE', label: 'A-' },
-  { value: 'B_POSITIVE', label: 'B+' },
-  { value: 'B_NEGATIVE', label: 'B-' },
-  { value: 'AB_POSITIVE', label: 'AB+' },
-  { value: 'AB_NEGATIVE', label: 'AB-' },
-  { value: 'O_POSITIVE', label: 'O-' },
-  { value: 'O_NEGATIVE', label: 'O-' },
+  { value: "A_POSITIVE", label: "A+" },
+  { value: "A_NEGATIVE", label: "A-" },
+  { value: "B_POSITIVE", label: "B+" },
+  { value: "B_NEGATIVE", label: "B-" },
+  { value: "AB_POSITIVE", label: "AB+" },
+  { value: "AB_NEGATIVE", label: "AB-" },
+  { value: "O_POSITIVE", label: "O-" },
+  { value: "O_NEGATIVE", label: "O-" },
 ];
 
 const DonorRegisterForm = () => {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [bloodType, setBloodType] = useState(types[0].value);
-  const [email, setEmail] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [street, setStreet] = useState('');
-  const [city, setCity] = useState('');
-  const [state, setState] = useState('');
-  const [zip, setZip] = useState('');
-  const [dob, setDob] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [street, setStreet] = useState("");
+  const [city, setCity] = useState("");
+  const [state, setState] = useState("");
+  const [zip, setZip] = useState("");
+  const [dob, setDob] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState(null);
   const [submissionComplete, setSubmissionComplete] = useState(false);
 
   const validateDateOfBirth = (inputDate) => {
     const today = new Date();
     const enteredDate = new Date(inputDate);
-  
+
     // Check if the entered date is valid
     if (isNaN(enteredDate)) {
       setError("Invalid date. Please enter a valid date.");
       return false;
     }
-  
+
     // Check if the entered date is in the future
     if (enteredDate > today) {
       setError("Date of birth cannot be in the future.");
       return false;
     }
-  
+
     // Check if the user is at least 18 years old
     const age = today.getFullYear() - enteredDate.getFullYear();
     const ageMonthDiff = today.getMonth() - enteredDate.getMonth();
     const ageDayDiff = today.getDate() - enteredDate.getDate();
-    if (age < 18 || (age === 18 && (ageMonthDiff < 0 || (ageMonthDiff === 0 && ageDayDiff < 0)))) {
+    if (
+      age < 18 ||
+      (age === 18 &&
+        (ageMonthDiff < 0 || (ageMonthDiff === 0 && ageDayDiff < 0)))
+    ) {
       setError("You must be at least 18 years old.");
       return false;
     }
-  
+
     // Clear the error if all validations pass
     setError("");
     return true;
@@ -64,47 +68,50 @@ const DonorRegisterForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (password !== confirmPassword) {
-      setError('Passwords do not match');
+      setError("Passwords do not match");
       return;
     }
-    if(!validateDateOfBirth(dob)){
+    if (!validateDateOfBirth(dob)) {
       setError("Invalid date. Please enter a valid date.");
       return;
     }
     try {
-      const response = await fetch(`${configuration.BACKEND_URL}/lifeline/register/donor`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          firstName,
-          lastName,
-          bloodType,
-          email,
-          phoneNumber,
-          street,
-          city,
-          state,
-          zip,
-          dob,
-          password,
-        }),
-      });
+      const response = await fetch(
+        `${configuration.BACKEND_URL}/lifeline/register/donor`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            firstName,
+            lastName,
+            bloodType,
+            email,
+            phoneNumber,
+            street,
+            city,
+            state,
+            zip,
+            dob,
+            password,
+          }),
+        }
+      );
       const data = await response.json();
       if (data.success) {
         // Registration successful, redirect to login page
         setSubmissionComplete(true);
-        console.log('Registration successful');
+        console.log("Registration successful");
       } else {
         setError(data.message);
       }
     } catch (error) {
-      setError('Registration failed');
+      setError("Registration failed");
     }
   };
 
   useEffect(() => {
     if (submissionComplete) {
-      redirect('/login');
+      redirect("/login");
     }
   }, [submissionComplete]);
 
@@ -114,7 +121,10 @@ const DonorRegisterForm = () => {
       <form onSubmit={handleSubmit}>
         <div className="flex flex-wrap -mx-3 mb-6">
           <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="firstName">
+            <label
+              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              htmlFor="firstName"
+            >
               First Name
             </label>
             <input
@@ -127,7 +137,10 @@ const DonorRegisterForm = () => {
             />
           </div>
           <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="lastName">
+            <label
+              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              htmlFor="lastName"
+            >
               Last Name
             </label>
             <input
@@ -141,8 +154,11 @@ const DonorRegisterForm = () => {
           </div>
         </div>
         <div className="flex flex-wrap -mx-3 mb-6">
-        <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="registrationType">
+          <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+            <label
+              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              htmlFor="registrationType"
+            >
               Blood Type
             </label>
             <select
@@ -160,7 +176,10 @@ const DonorRegisterForm = () => {
             </select>
           </div>
           <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="email">
+            <label
+              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              htmlFor="email"
+            >
               Email
             </label>
             <input
@@ -175,7 +194,10 @@ const DonorRegisterForm = () => {
         </div>
         <div className="flex flex-wrap -mx-3 mb-6">
           <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="phoneNumber">
+            <label
+              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              htmlFor="phoneNumber"
+            >
               Phone Number
             </label>
             <input
@@ -187,7 +209,10 @@ const DonorRegisterForm = () => {
             />
           </div>
           <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="street">
+            <label
+              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              htmlFor="street"
+            >
               Street
             </label>
             <input
@@ -201,7 +226,10 @@ const DonorRegisterForm = () => {
         </div>
         <div className="flex flex-wrap -mx-3 mb-6">
           <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="city">
+            <label
+              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              htmlFor="city"
+            >
               City
             </label>
             <input
@@ -213,7 +241,10 @@ const DonorRegisterForm = () => {
             />
           </div>
           <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="state">
+            <label
+              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              htmlFor="state"
+            >
               State
             </label>
             <input
@@ -227,7 +258,10 @@ const DonorRegisterForm = () => {
         </div>
         <div className="flex flex-wrap -mx-3 mb-6">
           <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="zip">
+            <label
+              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              htmlFor="zip"
+            >
               Zip
             </label>
             <input
@@ -239,7 +273,10 @@ const DonorRegisterForm = () => {
             />
           </div>
           <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="dob">
+            <label
+              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              htmlFor="dob"
+            >
               Date of Birth
             </label>
             <input
@@ -254,20 +291,26 @@ const DonorRegisterForm = () => {
         </div>
         <div className="flex flex-wrap -mx-3 mb-6">
           <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-              <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="password">
-                Password
-              </label>
-              <input
-                className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                id="password"
-                type="password"
-                value={password}
-                onChange={(event) => setPassword(event.target.value)}
-                required
-              />
+            <label
+              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              htmlFor="password"
+            >
+              Password
+            </label>
+            <input
+              className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              id="password"
+              type="password"
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
+              required
+            />
           </div>
           <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="confirm_password">
+            <label
+              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              htmlFor="confirm_password"
+            >
               Confirm Password
             </label>
             <input
