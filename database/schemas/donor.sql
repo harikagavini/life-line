@@ -1,6 +1,6 @@
 CREATE TABLE donor (
   donor_id int NOT NULL AUTO_INCREMENT,
-  blood_type enum('AB-','AB+','A-','A+','B-','B+','O-','O+') NOT NULL,
+  blood_type enum('AB_NEGATIVE','AB_POSITIVE','A_NEGATIVE','A_POSITIVE','B_NEGATIVE','B_POSITIVE','O_NEGATIVE','O_POSITIVE') NOT NULL,
   city varchar(255) NULL,
   dob date NOT NULL,
   email varchar(255) NOT NULL,
