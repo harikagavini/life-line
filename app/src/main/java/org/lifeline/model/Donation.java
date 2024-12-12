@@ -10,15 +10,10 @@ public class Donation {
 
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long donationId;
-    @Column(name = "EventId", nullable = false)
     private Long eventId;
-    @Column(name = "Quantity", nullable = false)
     private int quantity;
-    @Column(name = "BloodType", nullable = false)
     private String bloodType;
-    @Column(name = "DonationDate", nullable = false)
     private Date donationDate;
 
     @ManyToOne

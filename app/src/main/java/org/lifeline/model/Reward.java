@@ -7,11 +7,8 @@ import jakarta.persistence.*;
 public class Reward {
 
     @Id
-    @Column(name = "DonorId", nullable = false)
     private Long donorId;
-    @Column(name = "TotalPoints", nullable = false)
     private int totalPoints;
-    @Column(name = "Balance", nullable = false)
     private int balance;
 
     @OneToOne
