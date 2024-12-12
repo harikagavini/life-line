@@ -30,7 +30,7 @@ public class ServicesController {
 
     @GetMapping
     public ResponseEntity<List<Services>> getAllEvents() {
-        List<Services> services = ServicesService.getAllServices();
+        List<Services> services = servicesService.getAllServices();
         return new ResponseEntity<>(services, HttpStatus.OK);
     }
 
