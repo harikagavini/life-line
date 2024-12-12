@@ -20,8 +20,6 @@ public class Donor {
     private String city;
     private String state;
     private String zip;
-    @Column(name = "totalDonated", nullable = true)
-    private int totalDonated;
     @Transient
     private String password;
 
@@ -119,13 +117,5 @@ public class Donor {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public int getTotalDonated() {
-        return totalDonated;
-    }
-
-    public void setTotalDonated(int totalDonated) {
-        this.totalDonated = totalDonated;
     }
 }

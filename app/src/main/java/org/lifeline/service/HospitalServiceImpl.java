@@ -36,6 +36,7 @@ public class HospitalServiceImpl implements HospitalService {
         authRequest.setEmail(hosp.getEmail());
         authRequest.setPassword(hosp.getPassword());
         authRequest.setRegistrationType(RegistrationType.HOSPITAL);
+        authRequest.setHospitalId(hosp.getHospitalId());
         authRepository.save(authRequest);
 
         return savedModel;

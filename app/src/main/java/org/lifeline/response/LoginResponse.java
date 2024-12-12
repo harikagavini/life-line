@@ -8,6 +8,8 @@ public class LoginResponse {
     private boolean success;
     private String token;
     private String type;
+    private String branchId;
+    private String hospitalId;
 
     public LoginResponse() {
     }
@@ -42,6 +44,22 @@ public class LoginResponse {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getBranchId() {
+        return branchId;
+    }
+
+    public void setBranchId(String branchId) {
+        this.branchId = branchId;
+    }
+
+    public String getHospitalId() {
+        return hospitalId;
+    }
+
+    public void setHospitalId(String hospitalId) {
+        this.hospitalId = hospitalId;
     }
 }
 

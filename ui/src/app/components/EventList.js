@@ -4,6 +4,23 @@ import React, { useEffect, useState } from "react";
 import EventCard from "./EventCard";
 import configuration from "@/app/config";
 import Cookies from "js-cookie";
+import dateStringOffSetCorrection from "@/app/utils/dateOffSetCorrection";
+
+function compareDate(a, b) {
+  const dateA = new Date(a.eventDate);
+  const dateB = new Date(b.eventDate);
+  dateA.setHours(0, 0, 0, 0);
+  dateB.setHours(0, 0, 0, 0);
+  return dateB - dateA;
+}
+
+function compareWithToday(a) {
+  const today = new Date();
+  const eventDate = dateStringOffSetCorrection(a.eventDate);
+  today.setHours(0, 0, 0, 0);
+  eventDate.setHours(0, 0, 0, 0);
+  return eventDate - today;
+}
 
 const EventList = () => {
   const [events, setEvents] = useState([]);
@@ -81,15 +98,37 @@ const EventList = () => {
     }
   };
 
+  const handleDonation = async (donationDetails) => {
+    try {
+      const response = await fetch(`${configuration.BACKEND_URL}/lifeline/donation`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${Cookies.get('token')}`
+        },
+        body: JSON.stringify(donationDetails),
+      });
+      if (response.ok) {
+        return true;
+      } else {
+        setError(data.message);
+      }
+    } catch (error) {
+      setError('Donation details submission failed');
+    }
+  };
+
   return (
     <div className="event-list">
-      {events.map((event, index) => (
+      {events.sort(compareDate).map((event, index) => (
         <EventCard
           key={index}
           event={event}
-          isEditable={Cookies.get('type') === 'BLOOD_BANK'} // Set based on user role or permissions
+          isEditable={compareWithToday(event) > 0 && Cookies.get('type') === 'BLOOD_BANK' && Cookies.get('branchId') === event.branchId } // Set based on user role or permissions
+          isOngoing={compareWithToday(event) == 0}
           onEdit={handleEdit}
           onDelete={handleDelete}
+          onDonation={handleDonation}
         />
       ))}
     </div>

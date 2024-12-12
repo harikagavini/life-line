@@ -152,7 +152,8 @@ body {
 }
 
 .btn-edit,
-.btn-delete {
+.btn-delete
+.btn-ongoing {
   background-color: #4caf50;
   color: white;
   padding: 0.5em 1em;
@@ -173,6 +174,14 @@ body {
   background-color: #d32f2f;
 }
 
+.btn-ongoing {
+  background-color: #ffa07a;
+}
+
+.btn-ongoing:hover {
+  background-color: #ff8c00;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .card {
@@ -185,7 +194,8 @@ body {
   }
 
   .btn-edit,
-  .btn-delete {
+  .btn-delete
+  .btn-ongoing {
     width: 100%;
   }
 }

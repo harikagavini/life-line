@@ -35,6 +35,7 @@ public class BloodBankServiceImpl implements BloodBankService {
         authRequest.setEmail(bloodBank.getEmail());
         authRequest.setPassword(bloodBank.getPassword());
         authRequest.setRegistrationType(RegistrationType.BLOOD_BANK);
+        authRequest.setBranchId(bloodBank.getBranchId());
         authRepository.save(authRequest);
 
         return savedModel;
